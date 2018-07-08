@@ -271,7 +271,7 @@ Purpose of Method: To Swipe in any desired direction and speed
     	boolean exit=false;
     	do {
 			if (checkForVisiblity(webElement, driver)) {
-				sleep(5);
+				sleep(3);
 			}else{
 				exit=true;
 			}

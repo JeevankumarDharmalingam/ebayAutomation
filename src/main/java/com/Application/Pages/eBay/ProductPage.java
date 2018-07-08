@@ -114,12 +114,12 @@ public class ProductPage extends KeywordFunctions{
 	
 
 /**********************************************************************************************************************************	
-	Name of Function			: SearchData
-	Purpose of Method	: To search with the given input data
+	Name of Function	: searchProduct
+	Purpose of Function	: To search product with the given data
 		
 **********************************************************************************************************************************/	
 
-public boolean searchData(WebDriver driver, String searchText) throws Exception {
+public boolean searchProduct(WebDriver driver, String searchText) throws Exception {
 		
 		
 		try {
@@ -155,8 +155,8 @@ public boolean searchData(WebDriver driver, String searchText) throws Exception 
 			}
 
 /**********************************************************************************************************************************	
-Name of Function			: SellectingSearchResults
-Purpose of Method	: To randomly select any one of the search result except the first and last result
+Name of Function	: selectingSearchResults
+Purpose of Function	: To randomly select any one of the search result except the first and last result
 	
 **********************************************************************************************************************************/	
 
@@ -193,8 +193,8 @@ return testStepStatus;
 		}
 
 /**********************************************************************************************************************************	
-Name of Function			: calibratePriceFilter
-Purpose of Method	: To set a price filter for the search results, 
+Name of Function	: calibratePriceFilter
+Purpose of Function	: To set a price filter for the search results, 
 					  this method will make sure the results are displayed only for the given price range.
 	
 **********************************************************************************************************************************/	
@@ -236,12 +236,12 @@ return testStepStatus;
 		}
 
 /**********************************************************************************************************************************	
-Name of Function			: proceedOrder
-Purpose of Method	: To take the order entry till payment window
+Name of Function	: placeOrder
+Purpose of Function	: To take the order entry till payment window
 	
 **********************************************************************************************************************************/	
 
-public boolean placeOrder(WebDriver driver) throws Exception {
+public boolean verifyProductPage(WebDriver driver) throws Exception {
 	
 	
 	try {
@@ -260,16 +260,42 @@ public boolean placeOrder(WebDriver driver) throws Exception {
 		if (checkForVisiblity(buyItNow, driver)) {
 			LOGGER.info("buy It Now is Present");
 			clickOn(driver, buyItNow);
-			if (checkForVisiblity(review, driver)) {
+			if (checkForVisiblity(review, driver) & testStepStatus) {
 				LOGGER.info("review is Present");
 				clickOn(driver, review);
+			}else {
+				LOGGER.info("Product information doesn't match");
 			}
 			waitUntilInvisible(pageLoad);
 		}
 		
+		
+		
+	}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+return testStepStatus;
+		}
+
+public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
+	
+	
+	try {
+		testStepStatus = false;
+		waitUntilInvisible(pageLoad);
+		driver.getPageSource();
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
 		MobileappRefresh(driver);
+		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName.substring(2)+"')]"));
+		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(2)+"')]"));
+		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
+			testStepStatus=true;
+			LOGGER.info("The product name "+itemName+" matches with the details in the checkout page");
+		}else{
+			LOGGER.info("The product name "+itemName+" do not matches with the details in the checkout page");
+		}
 		if (checkForVisiblity(proceedToPay, driver)) {
 			LOGGER.info("Proceed to Pay is Present");
 			clickOn(driver, proceedToPay);

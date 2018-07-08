@@ -37,7 +37,7 @@ public class EBayAutomationTest extends ParentTest{
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
 		LoginPage eB=new LoginPage(driver);
-		testStepStatus=eB.SignIn(driver,testData.getUserName(),testData.getPassWord());
+		testStepStatus=eB.LogIn(driver,testData.getUserName(),testData.getPassWord());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "User logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
 			assertTrue(testStepStatus);
@@ -56,9 +56,8 @@ public class EBayAutomationTest extends ParentTest{
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
 		ProductPage eBPP=new ProductPage(driver);
-		System.out.println("Max Price = "+testData.getMaxPrice());
 		try {
-			testStepStatus=eBPP.searchData(driver,testData.getSearchText());
+			testStepStatus=eBPP.searchProduct(driver,testData.getSearchText());
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Search operation was successful with the following search data :"+testData.getSearchText());
 				assertTrue(testStepStatus);
@@ -85,9 +84,17 @@ public class EBayAutomationTest extends ParentTest{
 				assertEquals(testStepStatus, true);
 			}
 			
-			testStepStatus=eBPP.placeOrder(driver);
+			testStepStatus=eBPP.verifyProductPage(driver);
 			if (testStepStatus) {
-				logger.log(Status.PASS, "Order was reviewed and successfully proceeded till payment page");
+				logger.log(Status.PASS, "Order was reviewed and successfully proceeded to checkout page");
+				assertTrue(testStepStatus);
+			}else{
+				logger.log(Status.FAIL, "Order was not proceeded till payment page");
+				assertEquals(testStepStatus, true);
+			}
+			testStepStatus=eBPP.verifyCheckoutPage(driver);
+			if (testStepStatus) {
+				logger.log(Status.PASS, "Order was reviewed and information is verified and then successfully proceeded till payment page");
 				assertTrue(testStepStatus);
 			}else{
 				logger.log(Status.FAIL, "Order was not proceeded till payment page");

@@ -49,13 +49,13 @@ public class LoginPage extends KeywordFunctions{
 	}
 	
 /**********************************************************************************************************************************	
-	Method Name			: SignIn
-	Purpose of Method	: To sign in with the given username and password and verify if the sign in was successful
+	Name of Function		: LogIn
+	Purpose of Function	: To Log in with the given username and password and verify if the LogIn is successful
 		
 **********************************************************************************************************************************/	
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })
-public boolean SignIn(WebDriver driver,String usernameText, String passwordText) throws Exception {
+public boolean LogIn(WebDriver driver,String usernameText, String passwordText) throws Exception {
 		
 		
 		try {

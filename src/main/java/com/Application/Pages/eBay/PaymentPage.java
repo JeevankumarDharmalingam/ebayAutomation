@@ -21,7 +21,6 @@ import io.appium.java_client.AppiumDriver;
 
 public class PaymentPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(PaymentPage.class);
-	//public static String usernameText,passwordText;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
 	public WebElement pageLoad;
@@ -81,8 +80,8 @@ public class PaymentPage extends KeywordFunctions{
 	}
 	
 /**********************************************************************************************************************************	
-	Method Name			: Navigate to Payment type
-	Purpose of Method	: Navigate to Payment type
+	Name of Function		: navigateToCardPaymnetType
+	Purpose of Function	: Navigate to Payment type
 		
 **********************************************************************************************************************************/	
 
@@ -131,6 +130,13 @@ public class PaymentPage extends KeywordFunctions{
 		}
 		return testStepStatus;
 	}
+	
+/**********************************************************************************************************************************	
+	Name of Function		: UPIPayment
+	Purpose of Function	: Make UPI Paymenr
+		
+**********************************************************************************************************************************/	
+
 	public boolean UPIPayment(String UPI) {
 		
 		testStepStatus=false;
@@ -143,10 +149,10 @@ public class PaymentPage extends KeywordFunctions{
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
 				MobileappRefresh(driver);
-				sleep(3);
+				sleep(2);
 				clickOn(driver, makePaymentBtn);
 			}
-			sleep(4);
+			sleep(3);
 			if (checkForVisiblity(errorMsg,driver)) {
 				LOGGER.error("The error occured is "+errorMsg.getAttribute("text"));
 				LOGGER.info("Error message popped Up");

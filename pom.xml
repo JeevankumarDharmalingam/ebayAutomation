@@ -251,7 +251,7 @@
 				<version>2.9</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>eBay_TestNG.xml</suiteXmlFile>
+						<suiteXmlFile>eBay_productPurchase_TestNG.xml</suiteXmlFile>
 					</suiteXmlFiles>
 
 					<!-- <systemProperties>
