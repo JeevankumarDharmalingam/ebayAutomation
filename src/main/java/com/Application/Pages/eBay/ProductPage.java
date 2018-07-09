@@ -115,7 +115,7 @@ public class ProductPage extends KeywordFunctions{
 
 /**********************************************************************************************************************************	
 	Name of Function	: searchProduct
-	Purpose of Function	: To search product with the given data
+	Description	: To search product with the given data
 		
 **********************************************************************************************************************************/	
 
@@ -156,7 +156,7 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 
 /**********************************************************************************************************************************	
 Name of Function	: selectingSearchResults
-Purpose of Function	: To randomly select any one of the search result except the first and last result
+Description	: To randomly select any one of the search result except the first and last result
 	
 **********************************************************************************************************************************/	
 
@@ -194,7 +194,7 @@ return testStepStatus;
 
 /**********************************************************************************************************************************	
 Name of Function	: calibratePriceFilter
-Purpose of Function	: To set a price filter for the search results, 
+Description	: To set a price filter for the search results, 
 					  this method will make sure the results are displayed only for the given price range.
 	
 **********************************************************************************************************************************/	
@@ -237,7 +237,7 @@ return testStepStatus;
 
 /**********************************************************************************************************************************	
 Name of Function	: placeOrder
-Purpose of Function	: To take the order entry till payment window
+Description	: To take the order entry till payment window
 	
 **********************************************************************************************************************************/	
 
@@ -278,6 +278,12 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 return testStepStatus;
 		}
 
+/**********************************************************************************************************************************	
+Name of Function	: verifyCheckoutPage
+Description	: To verfiy product in checkout Page and take the order entry till payment window
+	
+**********************************************************************************************************************************/	
+
 public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 	
 	
@@ -289,7 +295,7 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		swipe(driver, "up", "fast");
 		MobileappRefresh(driver);
 		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName.substring(2)+"')]"));
-		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(2)+"')]"));
+		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(4)+"')]"));
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the checkout page");

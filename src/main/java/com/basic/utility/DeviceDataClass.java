@@ -22,6 +22,7 @@ public class DeviceDataClass {
 	private String UDID;
 	private String osName;
 	private String osVersion;
+	private String portNo;
 	
 	public DeviceDataClass(String applicationName) {
 		Map<String, String> deviceData = KeywordFunctions.getDataFromFiles(applicationName,Constants.excelExecutionDataPage);
@@ -31,8 +32,17 @@ public class DeviceDataClass {
 		this.UDID=deviceData.get("UDID");
 		this.osName=deviceData.get("osName");
 		this.osVersion=deviceData.get("osVersion");
+		this.portNo=deviceData.get("portNo");
 	}
 	
+	public String getPortNo() {
+		return portNo;
+	}
+
+	public void setPortNo(String portNo) {
+		this.portNo = portNo;
+	}
+
 	public String getApplicationName() {
 		return applicationName;
 	}

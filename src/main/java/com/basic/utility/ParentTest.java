@@ -34,6 +34,7 @@ import io.appium.java_client.android.StartsActivity;
 public class ParentTest {
 	protected static final Logger LOGGER = Logger.getLogger(ParentTest.class);
 	public static WebDriver driver=null;
+	public String application=System.getProperty("application");
 	private DeviceDataClass deviceData;
 	public boolean testStepStatus;
 	protected ExtentHtmlReporter htmlReporter;
@@ -46,7 +47,7 @@ public class ParentTest {
 	}
 	
 	 public ParentTest() {
-			 deviceData=new DeviceDataClass(Constants.application);
+			 deviceData=new DeviceDataClass(application);
 	}
 	
 	 public void startReportingTest(String methodInstance) {
@@ -69,8 +70,8 @@ public  WebDriver getDriver() throws InterruptedException, Exception {
 					capability.setCapability("app", new File(Constants.applicationPath));
 					capability.setCapability("appPackage",deviceData.getAppPackage());
 					capability.setCapability("appActivity",deviceData.getAppActivity());
-					
-					driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"),capability);
+					LOGGER.info("Driver instantiated with port no "+deviceData.getPortNo());
+					driver = new AndroidDriver(new URL("http://0.0.0.0:"+deviceData.getPortNo()+"/wd/hub"),capability);
 		}catch(Exception e) {
 			e.printStackTrace();
 			

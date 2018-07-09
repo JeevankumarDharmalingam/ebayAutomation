@@ -81,7 +81,7 @@ public class PaymentPage extends KeywordFunctions{
 	
 /**********************************************************************************************************************************	
 	Name of Function		: navigateToCardPaymnetType
-	Purpose of Function	: Navigate to Payment type
+	Description	: Navigate to Payment type
 		
 **********************************************************************************************************************************/	
 
@@ -133,7 +133,7 @@ public class PaymentPage extends KeywordFunctions{
 	
 /**********************************************************************************************************************************	
 	Name of Function		: UPIPayment
-	Purpose of Function	: Make UPI Paymenr
+	Description	: Make UPI Paymenr
 		
 **********************************************************************************************************************************/	
 

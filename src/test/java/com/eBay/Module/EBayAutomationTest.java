@@ -136,7 +136,7 @@ public class EBayAutomationTest extends ParentTest{
 		LOGGER.info("Execution of Suite "+ctx.getSuite().getName()+" Started");
 		testData=new TestDataClass(ctx.getSuite().getName());
 		driver = getDriver();
-		LOGGER.info(Constants.application+" is Successfully launched");
+		LOGGER.info(application+" is Successfully launched");
 		
 		}catch (Exception e) {
 			e.printStackTrace();
