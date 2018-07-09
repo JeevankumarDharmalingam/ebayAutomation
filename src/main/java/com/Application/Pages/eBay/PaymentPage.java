@@ -149,10 +149,10 @@ public class PaymentPage extends KeywordFunctions{
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
 				MobileappRefresh(driver);
-				sleep(2);
+				wait(1);
 				clickOn(driver, makePaymentBtn);
 			}
-			sleep(3);
+			wait(3);
 			if (checkForVisiblity(errorMsg,driver)) {
 				LOGGER.error("The error occured is "+errorMsg.getAttribute("text"));
 				LOGGER.info("Error message popped Up");

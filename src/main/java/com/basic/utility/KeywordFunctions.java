@@ -94,7 +94,7 @@ public class KeywordFunctions extends ParentTest{
 		
 **********************************************************************************************************************************/	
 
-	protected static void sleep(int timeOutInSeconds) {
+	protected static void wait(int timeOutInSeconds) {
 		LOGGER.info("Wait for "+timeOutInSeconds+" seconds");
 		try {
 			Thread.sleep(timeOutInSeconds * 1000);
@@ -271,7 +271,7 @@ Purpose of Method: To Swipe in any desired direction and speed
     	boolean exit=false;
     	do {
 			if (checkForVisiblity(webElement, driver)) {
-				sleep(3);
+				wait(2);
 			}else{
 				exit=true;
 			}
@@ -391,7 +391,7 @@ Purpose of Method: To Swipe in any desired direction and speed
     	
 				LOGGER.info("Local device App refreshing");
 				((AndroidDriver) driver).pressKeyCode(187);
-				sleep(2);
+				wait(2);
 				((AndroidDriver) driver).pressKeyCode(187);
     	
     }

@@ -131,7 +131,7 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 				}
 				
 				if (checkForVisiblity(pageLoad, driver)) {
-					sleep(5);
+					wait(5);
 				}
 				
 				if (checkForVisiblity(text_Slot, driver)) {
@@ -294,8 +294,9 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
 		MobileappRefresh(driver);
-		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName.substring(2)+"')]"));
-		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(4)+"')]"));
+		wait(2);
+		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName.substring(5,27)+"')]"));
+		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(2)+"')]"));
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the checkout page");
