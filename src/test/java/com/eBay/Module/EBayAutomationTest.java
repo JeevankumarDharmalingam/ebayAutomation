@@ -45,8 +45,6 @@ public class EBayAutomationTest extends ParentTest{
 			logger.log(Status.FAIL, "User is not logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
 			assertEquals(testStepStatus, true);
 		}
-		
-		
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,6 +56,7 @@ public class EBayAutomationTest extends ParentTest{
 		ProductPage eBPP=new ProductPage(driver);
 		try {
 			testStepStatus=eBPP.searchProduct(driver,testData.getSearchText());
+			
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Search operation was successful with the following search data :"+testData.getSearchText());
 				assertTrue(testStepStatus);
@@ -103,7 +102,6 @@ public class EBayAutomationTest extends ParentTest{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	@Test(priority=2,dependsOnMethods={"searchAndPlaceOrder"})
 	public void paymentValidation() {
@@ -129,12 +127,10 @@ public class EBayAutomationTest extends ParentTest{
 			assertEquals(testStepStatus, true);
 		}
 	}
-	
 	@BeforeSuite
 	public void suite(ITestContext ctx) throws Exception{
 		try{
 		LOGGER.info("Execution of Suite "+ctx.getSuite().getName()+" Started");
-		testData=new TestDataClass(ctx.getSuite().getName());
 		driver = getDriver();
 		LOGGER.info(application+" is Successfully launched");
 		
@@ -142,20 +138,16 @@ public class EBayAutomationTest extends ParentTest{
 			e.printStackTrace();
 		}			
 	}
-	
-	
 	@BeforeTest(alwaysRun=true)
-	 public void startReport() throws Exception{
+	 public void startReport(ITestContext testContext) throws Exception{
 		try {
-			htmlReporter = new ExtentHtmlReporter(Constants.reportPath);
-			extent = new ExtentReports();
-			extent.attachReporter(htmlReporter);
+			System.out.println("Test Name "+testContext.getName());
+			testData=new TestDataClass(testContext.getName());
+			startReportingInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 	 }
-
-	
 	@AfterMethod
 	public void getResult(ITestResult result){
 		try {
@@ -166,7 +158,6 @@ public class EBayAutomationTest extends ParentTest{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
 	}
 	@AfterTest
 	public void endReport(){
@@ -178,7 +169,6 @@ public class EBayAutomationTest extends ParentTest{
 		LOGGER.info("Driver is getting closed");
 	               driver.quit();
 	   }
-	
 }
 
 

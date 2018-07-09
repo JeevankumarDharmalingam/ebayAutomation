@@ -49,6 +49,11 @@ public class ParentTest {
 	 public ParentTest() {
 			 deviceData=new DeviceDataClass(application);
 	}
+	 public void startReportingInstance() {
+		 	htmlReporter = new ExtentHtmlReporter(Constants.reportPath);
+			extent = new ExtentReports();
+			extent.attachReporter(htmlReporter);
+	}
 	
 	 public void startReportingTest(String methodInstance) {
 		 logger = extent.createTest(methodInstance);	

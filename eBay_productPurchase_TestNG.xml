@@ -2,9 +2,9 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="eBay_productPurchase" skipfailedinvocationcounts="false"  group-by-instances="false">   
+<suite name="eBay_productSuite" skipfailedinvocationcounts="false"  group-by-instances="false">   
     <!-- Tests started -->    
-        <test name="Login" preserve-order="true" skipfailedinvocationcounts="false">
+        <test name="eBay_productPurchase" preserve-order="true" skipfailedinvocationcounts="false">
         <classes>
         <class name="com.eBay.Module.EBayAutomationTest"/>
         </classes>
