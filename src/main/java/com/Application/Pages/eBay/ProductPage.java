@@ -30,13 +30,13 @@ public class ProductPage extends KeywordFunctions{
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_item_count']")
 	private WebElement searchResults;
 	
-	@FindBy(xpath="//android.widget.Button[contains(@text,'BUY IT NOW'])")
+	@FindBy(xpath="//android.widget.Button[contains(@text,'BUY IT NOW')]")
 	private WebElement buyItNowBtn;
 	
-	@FindBy(xpath="//android.widget.Button[contains(@text,'REVIEW'])")
+	@FindBy(xpath="//android.widget.Button[contains(@text,'REVIEW')]")
 	private WebElement reviewBtn;
 	
-	@FindBy(xpath="//android.widget.Button[contains(@text,'Proceed to Pay'])")
+	@FindBy(xpath="//android.widget.Button[contains(@text,'Proceed to Pay')]")
 	private WebElement proceedToPayBtn;
 	
 	@FindBy(xpath="//*[contains(@text,'FILTER')]")
@@ -200,10 +200,9 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 	try {
 		testStepStatus = false;
 		waitUntilInvisible(pageLoadIcon);
-		driver.getPageSource();
+		if(checkForVisiblity(proceedToPayBtn, driver)) {
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
-		//MobileappRefresh(driver);
 		wait(2);
 		WebElement itemName=elemantToText(driver, productName.substring(3, 26));
 		WebElement productPrice=elemantToText(driver, itemPrice.substring(2));
@@ -218,7 +217,7 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 			clickOn(driver, proceedToPayBtn);
 			testStepStatus=true;
 		}
-		
+		}
 	}catch (Exception e) {
 		return testStepStatus=false;
 		}
