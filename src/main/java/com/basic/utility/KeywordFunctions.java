@@ -43,17 +43,7 @@ public class KeywordFunctions extends ParentTest{
 	public String SelectedPage=null;
 	public boolean testStepStatus;
 	
-	
-	public KeywordFunctions() {
-	}
-
-	
-/**********************************************************************************************************************************	
-	Purpose of Method: To wait until the page loads
-		
-**********************************************************************************************************************************/	
-
-	public static boolean waitForPageLoad(WebDriver driver){
+		public static boolean waitForPageLoad(WebDriver driver){
 		LOGGER.info(new Object(){}.getClass().getEnclosingMethod().getName());
 		boolean waitValue=false;
 		try {
@@ -70,10 +60,6 @@ public class KeywordFunctions extends ParentTest{
 		return waitValue;
 	}
 	
-/**********************************************************************************************************************************	
-	Purpose of Method: To wait for any desired period of time
-		
-**********************************************************************************************************************************/	
 
 	protected static void wait(int timeOutInSeconds) {
 		LOGGER.info("Wait for "+timeOutInSeconds+" seconds");
@@ -83,12 +69,6 @@ public class KeywordFunctions extends ParentTest{
 			e.printStackTrace();
 		}
 	}
-	
-	
-/**********************************************************************************************************************************	
-	Purpose of Method: To click on any desired object
-		
-**********************************************************************************************************************************/	
 
 	protected void clickOnElement(WebDriver driver,By element) {
 		LOGGER.info(new Object(){}.getClass().getEnclosingMethod().getName()+" : "+element.toString());
@@ -100,11 +80,6 @@ public class KeywordFunctions extends ParentTest{
 		}
 	}
 	
-/**********************************************************************************************************************************	
-	Purpose of Method: To click on any desired object
-		
-**********************************************************************************************************************************/	
-
 	protected void clickOn(WebDriver driver,WebElement element) {
 		try{
 			WebElement el=element;
@@ -115,8 +90,6 @@ public class KeywordFunctions extends ParentTest{
 			e2.click();
 		}
 	}
-	
-
 
 	protected void clickOnText(String textToFind) {
 		try{
@@ -127,24 +100,12 @@ public class KeywordFunctions extends ParentTest{
 		}
 	}
 	
-/**********************************************************************************************************************************	
-	Purpose of Method: To type any desired text into an object
-		
-**********************************************************************************************************************************/	
-
 	protected void enterTextValue(WebElement element, String text) {
 		LOGGER.info("Starting to Enter Text Value");
 		element.sendKeys(new CharSequence[] { text });
 		LOGGER.info("Entered " + text + " Successfully");
 	}
 	
-
-
-/**********************************************************************************************************************************	
-	Purpose of Method: To check if an object is present in the focused app page
-		
-**********************************************************************************************************************************/	
-
 	protected static boolean checkForVisiblity(WebElement locator, WebDriver driver)
     {
 
@@ -181,11 +142,6 @@ public class KeywordFunctions extends ParentTest{
         return waitValue;
 
     }
-/**********************************************************************************************************************************	
-Purpose of Method: To Swipe in any desired direction and speed
-	
-**********************************************************************************************************************************/	
-
 	public void swipe(WebDriver driver,String direction, String speed) throws InterruptedException
 	{
 		try{
@@ -236,29 +192,20 @@ Purpose of Method: To Swipe in any desired direction and speed
 			}
 	}
 
-/**********************************************************************************************************************************	
-	Purpose of Method: To wait until an object disappears
-		
-**********************************************************************************************************************************/	
-    
     public void waitUntilInvisible(WebElement webElement) {
        try{
-    	boolean exit=false;
+    	/*boolean exit=false;
     	do {
 			if (checkForVisiblity(webElement, driver)) {
 				wait(2);
 			}else{
 				exit=true;
 			}
-		} while (exit==false);
+		} while (exit==false);*/
        }catch (Exception e) {
 			e.printStackTrace();
 		}
     }
- /**********************************************************************************************************************************	
-	Purpose of Method: To swipe in a direction until the element is visible
-		
-**********************************************************************************************************************************/	
  
     public void swipeUntilVisible(WebElement webElement) throws InterruptedException {
        try{

@@ -3,7 +3,6 @@ package com.Application.Pages.eBay;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -42,7 +41,6 @@ public class LoginPage extends KeywordFunctions{
 	
 	public LoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
-	
 	}
 	
 /**********************************************************************************************************************************	
@@ -59,17 +57,17 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 				LOGGER.info("Sign In Button is Visible");
 				clickOn(driver,sign_In_Btn);
 				waitUntilInvisible(pageLoad);
-				
+				if(checkForVisiblity(userName, driver)) {
 					LOGGER.info("Logging in with UserName "+usernameText);
 					enterTextValue(userName, usernameText);
 					enterTextValue(password, passwordText);
 				
 					clickOn(driver, sign_In_Btn);
 					LOGGER.info("Clicked on SignIn Button");
+				}
 				if (checkForVisiblity(mayBeLater, driver)) {
 					clickOn(driver, mayBeLater);
 				}
-				
 				if (checkForVisiblity(notNow, driver)) {
 					clickOn(driver, notNow);
 				}

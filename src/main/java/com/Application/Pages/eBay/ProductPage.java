@@ -19,13 +19,10 @@ public class ProductPage extends KeywordFunctions{
 	private static String productName,itemPrice;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/search_box']")
-	private WebElement searchBox;
-	
-	@FindBy(xpath="//*[@text='Home']")
-	private WebElement home;
+	private WebElement searchBar;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/text_slot_1']")
-	private WebElement text_Slot;
+	private WebElement msg_Info;
 
 	@FindBy(xpath="//android.widget.RelativeLayout[3]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")
 	private WebElement searchSelect;
@@ -33,17 +30,17 @@ public class ProductPage extends KeywordFunctions{
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_item_count']")
 	private WebElement searchResults;
 	
-	@FindBy(xpath="//android.widget.Button[@text='BUY IT NOW']")
-	private WebElement buyItNow;
+	@FindBy(xpath="//android.widget.Button[contains(@text,'BUY IT NOW'])")
+	private WebElement buyItNowBtn;
 	
-	@FindBy(xpath="//android.widget.Button[@text='REVIEW']")
-	private WebElement review;
+	@FindBy(xpath="//android.widget.Button[contains(@text,'REVIEW'])")
+	private WebElement reviewBtn;
 	
-	@FindBy(xpath="//android.widget.Button[@text='Proceed to Pay']")
-	private WebElement proceedToPay;
+	@FindBy(xpath="//android.widget.Button[contains(@text,'Proceed to Pay'])")
+	private WebElement proceedToPayBtn;
 	
 	@FindBy(xpath="//*[contains(@text,'FILTER')]")
-	private WebElement filter;
+	private WebElement filterBtn;
 	
 	@FindBy(xpath="//*[contains(@text,'Price range')]")
 	private WebElement priceRange;
@@ -63,38 +60,8 @@ public class ProductPage extends KeywordFunctions{
 	@FindBy(xpath="//android.widget.Button[@text='DONE']")
 	private WebElement filterDoneBtn;
 	
-	@FindBy(xpath="//*[contains(@text,'Credit Card')]")
-	private WebElement creditCard;
-	
-	@FindBy(xpath="//android.widget.RadioButton[@text='American Express']")
-	private WebElement cardType;
-	
-	@FindBy(xpath="//*[@resource-id='btnPay']")
-	private WebElement payBtn;
-	
-	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[1]")
-	private WebElement cardNumber;
-	
-	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[2]")
-	private WebElement cardName;
-	
-	@FindBy(xpath="//android.widget.Spinner[@text='MM']")
-	private WebElement expiryMonth;
-	
-	@FindBy(xpath="//android.widget.Spinner[@text='YY']")
-	private WebElement expiryYear;
-	
-	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[3]")
-	private WebElement cvv;
-	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	private WebElement closePaymentPage;
-	
-	@FindBy(xpath="//*[@text='select address']")
-	private WebElement selectAddress;
-	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	private WebElement pageLoad;
+	private WebElement pageLoadIcon;
 	
 	@FindAll(@FindBy(xpath = "//*[@resource-id='com.ebay.mobile:id/cell_collection_item']"))
 	private List<WebElement> totalResults;
@@ -115,15 +82,15 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 		try {
 			testStepStatus = false;
 			
-				if (checkForVisiblity(searchBox, driver)) {
-					enterTextValue(searchBox, searchText);
+				if (checkForVisiblity(searchBar, driver)) {
+					enterTextValue(searchBar, searchText);
 					((AndroidDriver) driver).pressKeyCode(AndroidKeyCode.ENTER);
 				}			
-				if (checkForVisiblity(pageLoad, driver)) {
+				if (checkForVisiblity(pageLoadIcon, driver)) {
 					wait(5);
 				}				
-				if (checkForVisiblity(text_Slot, driver)) {
-					clickOn(driver, text_Slot);
+				if (checkForVisiblity(msg_Info, driver)) {
+					clickOn(driver, msg_Info);
 				}
 					String searchResult=searchResults.getAttribute("text");
 					String[] resVal=searchResult.split(" ");
@@ -152,8 +119,8 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 	
 	try {
 		testStepStatus = false;
-		if (checkForVisiblity(text_Slot, driver)) {
-			clickOn(driver, text_Slot);
+		if (checkForVisiblity(msg_Info, driver)) {
+			clickOn(driver, msg_Info);
 		}
 		int minVal=1;
 		int maxVal=totalResults.size();
@@ -167,7 +134,7 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 		productName=itemName.getAttribute("text");
 		itemPrice=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")).getAttribute("text");	
 		clickOn(driver, itemName);
-		waitUntilInvisible(pageLoad);
+		waitUntilInvisible(pageLoadIcon);
 		LOGGER.info("Selected product's Name is : "+productName);
 		LOGGER.info("Selected product's price is : "+itemPrice);
 		testStepStatus=true;
@@ -178,49 +145,7 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 return testStepStatus;
 		}
 
-/**********************************************************************************************************************************	
-Name of Function	: calibratePriceFilter
-Description	: To set a price filter for the search results, 
-					  this method will make sure the results are displayed only for the given price range.
-	
-**********************************************************************************************************************************/	
 
-public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exception {
-	
-	try {
-		testStepStatus = false;
-		if (checkForVisiblity(filter, driver)) {
-			clickOn(driver, filter);
-			LOGGER.info("Going to Calibrate Filter");
-			if (checkForVisiblity(priceRange, driver)) {
-				clickOn(driver, priceRange);
-				clickOn(driver, customPriceRange);
-				if (checkForVisiblity(customMinPriceRange, driver)) {
-					customMinPriceRange.sendKeys(minPrice);
-					clickOn(driver, customMaxPriceRange);
-					customMaxPriceRange.sendKeys(maxPrice);
-				}
-				if (checkForVisiblity(filterOkBtn, driver)) 
-					clickOn(driver, filterOkBtn);
-				if (checkForVisiblity(filterDoneBtn, driver)) {
-					clickOn(driver, filterDoneBtn);
-					LOGGER.info("Filter Calibrated");
-					testStepStatus=true;
-					waitUntilInvisible(pageLoad);
-				}else {
-					LOGGER.info("Filter Done Button is not clicked");
-				}
-				
-				
-			}
-		}	
-	
-	}catch (Exception e) {
-		return testStepStatus=false;
-		}
-		
-return testStepStatus;
-		}
 
 /**********************************************************************************************************************************	
 Name of Function	: placeOrder
@@ -233,7 +158,7 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 	
 	try {
 		testStepStatus = false;
-		waitUntilInvisible(pageLoad);
+		waitUntilInvisible(pageLoadIcon);
 		driver.getPageSource();
 		WebElement itemName=elemantToText(driver, productName);
 		WebElement productPrice=elemantToText(driver, itemPrice);
@@ -246,16 +171,16 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the  product page");
 		}
 		
-		if (checkForVisiblity(buyItNow, driver)) {
+		if (checkForVisiblity(buyItNowBtn, driver)) {
 			LOGGER.info("buy It Now is Present");
-			clickOn(driver, buyItNow);
-			if (checkForVisiblity(review, driver) & testStepStatus) {
-				LOGGER.info("review is Present");
-				clickOn(driver, review);
+			clickOn(driver, buyItNowBtn);
+			if (checkForVisiblity(reviewBtn, driver) & testStepStatus) {
+				LOGGER.info("reviewBtn is Present");
+				clickOn(driver, reviewBtn);
 			}else {
 				LOGGER.info("Product information doesn't match");
 			}
-			waitUntilInvisible(pageLoad);
+			waitUntilInvisible(pageLoadIcon);
 		}
 		
 		
@@ -278,7 +203,7 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 	
 	try {
 		testStepStatus = false;
-		waitUntilInvisible(pageLoad);
+		waitUntilInvisible(pageLoadIcon);
 		driver.getPageSource();
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
@@ -292,12 +217,56 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		}else{
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the checkout page");
 		}
-		if (checkForVisiblity(proceedToPay, driver) & testStepStatus) {
+		if (checkForVisiblity(proceedToPayBtn, driver) & testStepStatus) {
 			LOGGER.info("Proceed to Pay is Present");
-			clickOn(driver, proceedToPay);
+			clickOn(driver, proceedToPayBtn);
 			testStepStatus=true;
 		}
 		
+	}catch (Exception e) {
+		return testStepStatus=false;
+		}
+		
+return testStepStatus;
+		}
+
+/**********************************************************************************************************************************	
+Name of Function	: calibratePriceFilter
+Description	: To set a price filterBtn for the search results, 
+					  this method will make sure the results are displayed only for the given price range.
+	
+**********************************************************************************************************************************/	
+
+public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exception {
+	
+	try {
+		testStepStatus = false;
+		if (checkForVisiblity(filterBtn, driver)) {
+			clickOn(driver, filterBtn);
+			LOGGER.info("Going to Calibrate Filter");
+			if (checkForVisiblity(priceRange, driver)) {
+				clickOn(driver, priceRange);
+				clickOn(driver, customPriceRange);
+				if (checkForVisiblity(customMinPriceRange, driver)) {
+					customMinPriceRange.sendKeys(minPrice);
+					clickOn(driver, customMaxPriceRange);
+					customMaxPriceRange.sendKeys(maxPrice);
+				}
+				if (checkForVisiblity(filterOkBtn, driver)) 
+					clickOn(driver, filterOkBtn);
+				if (checkForVisiblity(filterDoneBtn, driver)) {
+					clickOn(driver, filterDoneBtn);
+					LOGGER.info("Filter Calibrated");
+					testStepStatus=true;
+					waitUntilInvisible(pageLoadIcon);
+				}else {
+					LOGGER.info("Filter Done Button is not clicked");
+				}
+				
+				
+			}
+		}	
+	
 	}catch (Exception e) {
 		return testStepStatus=false;
 		}

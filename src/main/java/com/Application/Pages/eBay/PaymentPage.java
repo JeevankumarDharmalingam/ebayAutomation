@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
 
-
-
 public class PaymentPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(PaymentPage.class);
 	
@@ -127,7 +125,6 @@ public class PaymentPage extends KeywordFunctions{
 		}
 		return testStepStatus;
 	}
-	
 /**********************************************************************************************************************************	
 	Name of Function		: UPIPayment
 	Description	: Make UPI Paymenr
