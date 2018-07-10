@@ -68,7 +68,6 @@ public class PaymentPage extends KeywordFunctions{
 
 	
 	public PaymentPage(WebDriver driver) {
-		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	
 	}

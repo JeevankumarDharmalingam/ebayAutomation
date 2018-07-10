@@ -364,7 +364,15 @@ Purpose of Method: To Swipe in any desired direction and speed
 				((AndroidDriver) driver).pressKeyCode(187);
     	
     }
-    
+    public static WebElement elemantToText(WebDriver driver,String text) {
+    	WebElement element = null;
+    	try {
+    		 element=driver.findElement(By.xpath("//*[contains(@text,'"+text+"')]"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return element;
+}
     public static String getScreenshot(WebDriver driver) {
 		TakesScreenshot ts=(TakesScreenshot) driver;
 		File src=ts.getScreenshotAs(OutputType.FILE);

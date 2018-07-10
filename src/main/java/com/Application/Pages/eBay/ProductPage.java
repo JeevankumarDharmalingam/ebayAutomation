@@ -16,10 +16,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 
 public class ProductPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(ProductPage.class);
-	public static int searchVal,randomResult;
-	public static String productName,productDescription,itemPrice;
-	
-	public static String usernameText,passwordText;
+	private static String productName,itemPrice;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/search_box']")
 	private WebElement searchBox;
@@ -103,7 +100,6 @@ public class ProductPage extends KeywordFunctions{
 	private List<WebElement> totalResults;
 	
 	public ProductPage(WebDriver driver) {
-		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -161,15 +157,14 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 		}
 		int minVal=1;
 		int maxVal=totalResults.size();
-		LOGGER.info(maxVal);
+		LOGGER.info("Maximum results in page "+maxVal);
 		int randomResult=(int) (Math.random()*(maxVal-minVal))+minVal;
 		if (randomResult==1) {
 			swipe(driver, "up", "medium");
 		}
-		LOGGER.info(randomResult);
+		LOGGER.info("Going to select "+randomResult);
 		WebElement itemName=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/textview_item_title']"));
 		productName=itemName.getAttribute("text");
-		productDescription=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/shipping_text']")).getAttribute("text");
 		itemPrice=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")).getAttribute("text");	
 		clickOn(driver, itemName);
 		waitUntilInvisible(pageLoad);
@@ -240,8 +235,10 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 		testStepStatus = false;
 		waitUntilInvisible(pageLoad);
 		driver.getPageSource();
-		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName+"')]"));
-		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice+"')]"));
+		WebElement itemName=elemantToText(driver, productName);
+		WebElement productPrice=elemantToText(driver, itemPrice);
+		/*WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName+"')]"));
+		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice+"')]"));*/
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the  product page");
@@ -287,8 +284,8 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		swipe(driver, "up", "fast");
 		//MobileappRefresh(driver);
 		wait(2);
-		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName.substring(5,27)+"')]"));
-		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(2)+"')]"));
+		WebElement itemName=elemantToText(driver, productName.substring(3, 26));
+		WebElement productPrice=elemantToText(driver, itemPrice.substring(2));
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the checkout page");

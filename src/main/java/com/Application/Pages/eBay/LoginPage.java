@@ -41,7 +41,6 @@ public class LoginPage extends KeywordFunctions{
 	private WebElement signInStatus;
 	
 	public LoginPage(WebDriver driver) {
-		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	
 	}
@@ -51,8 +50,6 @@ public class LoginPage extends KeywordFunctions{
 	Purpose of Function	: To Log in with the given username and password and verify if the LogIn is successful
 		
 **********************************************************************************************************************************/	
-
-	@SuppressWarnings({ "deprecation", "rawtypes" })
 public boolean LogIn(WebDriver driver,String usernameText, String passwordText) throws Exception {
 		
 		
