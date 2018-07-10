@@ -50,8 +50,6 @@ public class PaymentPage extends KeywordFunctions{
 	Description	: Navigate to Payment type
 		
 **********************************************************************************************************************************/	
-
-
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
 		waitUntilInvisible(pageLoadIcon);
@@ -93,7 +91,6 @@ public class PaymentPage extends KeywordFunctions{
 				testStepStatus=true;
 				break;
 			}
-			
 			}
 		} catch (Exception e) {
 			return testStepStatus=false;

@@ -40,27 +40,7 @@ public class KeywordFunctions extends ParentTest{
 	public static long max=60;
 	public static long med=30;
 	public static long min=10;
-	public String SelectedPage=null;
-	public boolean testStepStatus;
 	
-		public static boolean waitForPageLoad(WebDriver driver){
-		LOGGER.info(new Object(){}.getClass().getEnclosingMethod().getName());
-		boolean waitValue=false;
-		try {
-			driver.manage().timeouts().pageLoadTimeout(max, TimeUnit.SECONDS);
-			LOGGER.info("Page Loaded completely");
-			waitValue=true;
-		}catch(TimeoutException e){
-			LOGGER.info("Page taking longer than "+ max +" seconds time to load");
-			waitValue=true;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		return waitValue;
-	}
-	
-
 	protected static void wait(int timeOutInSeconds) {
 		LOGGER.info("Wait for "+timeOutInSeconds+" seconds");
 		try {
@@ -69,15 +49,11 @@ public class KeywordFunctions extends ParentTest{
 			e.printStackTrace();
 		}
 	}
-
-	protected void clickOnElement(WebDriver driver,By element) {
-		LOGGER.info(new Object(){}.getClass().getEnclosingMethod().getName()+" : "+element.toString());
-		try{
-			WebElement element1=driver.findElement(element);
-			element1.click();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+	
+	protected void enterTextValue(WebElement element, String text) {
+		LOGGER.info("Starting to Enter Text Value");
+		element.sendKeys(new CharSequence[] { text });
+		LOGGER.info("Entered " + text + " Successfully");
 	}
 	
 	protected void clickOn(WebDriver driver,WebElement element) {
@@ -90,7 +66,6 @@ public class KeywordFunctions extends ParentTest{
 			e2.click();
 		}
 	}
-
 	protected void clickOnText(String textToFind) {
 		try{
 			WebElement el=driver.findElement(By.xpath("//*[@text='"+textToFind+"']"));
@@ -100,11 +75,7 @@ public class KeywordFunctions extends ParentTest{
 		}
 	}
 	
-	protected void enterTextValue(WebElement element, String text) {
-		LOGGER.info("Starting to Enter Text Value");
-		element.sendKeys(new CharSequence[] { text });
-		LOGGER.info("Entered " + text + " Successfully");
-	}
+	
 	
 	protected static boolean checkForVisiblity(WebElement locator, WebDriver driver)
     {
@@ -129,19 +100,6 @@ public class KeywordFunctions extends ParentTest{
 		}
 		return false;
 	}
-	protected static boolean checkForVisiblityOfText(String textToFind)
-    {
-
-        boolean waitValue = false;
-        try {
-     	  waitValue = new WebDriverWait(driver, 8)
-                      .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(@text,'"+textToFind+"')]")))).isDisplayed();
-            
-        } catch (Exception e) {
-        }
-        return waitValue;
-
-    }
 	public void swipe(WebDriver driver,String direction, String speed) throws InterruptedException
 	{
 		try{
@@ -207,20 +165,6 @@ public class KeywordFunctions extends ParentTest{
 		}
     }
  
-    public void swipeUntilVisible(WebElement webElement) throws InterruptedException {
-       try{
-    	boolean exit=false;
-    	do {
-			if (checkForVisiblity(webElement, driver)) {
-				exit=true;
-			}else{
-				swipe(driver, "up", "fast");
-			}
-		} while (exit==false);
-    }catch (Exception e) {
-		e.printStackTrace();
-	}
-    }
     public static Map<String, String> getDataFromFiles(String detailInstanceName,String sheetName) {
 		XSSFWorkbook myWorkBook = null;
 		Map<String, String> testdata = null;
@@ -303,14 +247,6 @@ public class KeywordFunctions extends ParentTest{
 		}
 		return testdata;
 	}
-    public static void MobileappRefres(WebDriver driver) {
-    	
-				LOGGER.info("Local device App refreshing");
-				((AndroidDriver) driver).pressKeyCode(187);
-				wait(2);
-				((AndroidDriver) driver).pressKeyCode(187);
-    	
-    }
     public static WebElement elemantToText(WebDriver driver,String text) {
     	WebElement element = null;
     	try {
