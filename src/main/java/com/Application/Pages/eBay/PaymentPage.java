@@ -1,12 +1,7 @@
 package com.Application.Pages.eBay;
 
 
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
 
-import io.appium.java_client.AppiumDriver;
 
 
 public class PaymentPage extends KeywordFunctions{
@@ -89,44 +83,48 @@ public class PaymentPage extends KeywordFunctions{
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
 		waitUntilInvisible(pageLoad);
-		LOGGER.info("Proceeding with the payment type "+paymentType);
-		switch (paymentType) {
-		case "CreditCard":{
-			clickOnText(Constants.creditCard);
-			testStepStatus=true;
-			break;
-		}
-		case "DebitCard":{
-			clickOnText(Constants.debitCard);
-			testStepStatus=true;
-			break;
-		}
-		case "NetBanking":{
-			clickOnText(Constants.netBanking);
-			testStepStatus=true;
-			break;
-		}
-		case "CreditCardEMI":{
-			clickOnText(Constants.creditCard_EMI);
-			testStepStatus=true;
-			break;
-		}
-		case "UPI":{
-			clickOnText(Constants.UPI);
-			testStepStatus=true;
-			break;
-		}
-		case "Wallets_CashCards":{
-			clickOnText(Constants.wallets_CashCards);
-			testStepStatus=true;
-			break;
-		}
-		case "PhonePe_BHIM":{
-			clickOnText(Constants.phonePe_BHIM);
-			testStepStatus=true;
-			break;
-		}
-		
+		try {
+			LOGGER.info("Proceeding with the payment type "+paymentType);
+			switch (paymentType) {
+			case "CreditCard":{
+				clickOnText(Constants.creditCard);
+				testStepStatus=true;
+				break;
+			}
+			case "DebitCard":{
+				clickOnText(Constants.debitCard);
+				testStepStatus=true;
+				break;
+			}
+			case "NetBanking":{
+				clickOnText(Constants.netBanking);
+				testStepStatus=true;
+				break;
+			}
+			case "CreditCardEMI":{
+				clickOnText(Constants.creditCard_EMI);
+				testStepStatus=true;
+				break;
+			}
+			case "UPI":{
+				clickOnText(Constants.UPI);
+				testStepStatus=true;
+				break;
+			}
+			case "Wallets_CashCards":{
+				clickOnText(Constants.wallets_CashCards);
+				testStepStatus=true;
+				break;
+			}
+			case "PhonePe_BHIM":{
+				clickOnText(Constants.phonePe_BHIM);
+				testStepStatus=true;
+				break;
+			}
+			
+			}
+		} catch (Exception e) {
+			return testStepStatus=false;
 		}
 		return testStepStatus;
 	}
@@ -148,9 +146,11 @@ public class PaymentPage extends KeywordFunctions{
 			waitUntilInvisible(pageLoad);
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
-				//MobileappRefresh(driver);
 				wait(1);
 				clickOn(driver, makePaymentBtn);
+				if (checkForVisiblity(makePaymentBtn, driver)) {
+					clickOn(driver, makePaymentBtn);
+				}
 			}
 			wait(4);
 			if (checkForVisiblity(errorMsg,driver)) {
@@ -162,7 +162,7 @@ public class PaymentPage extends KeywordFunctions{
 				testStepStatus=true;
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			return testStepStatus=false;
 		}
 		return testStepStatus;
 	}

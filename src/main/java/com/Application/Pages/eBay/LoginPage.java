@@ -68,6 +68,7 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 					enterTextValue(password, passwordText);
 				
 					clickOn(driver, sign_In_Btn);
+					LOGGER.info("Clicked on SignIn Button");
 				if (checkForVisiblity(mayBeLater, driver)) {
 					clickOn(driver, mayBeLater);
 				}
@@ -90,7 +91,7 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 				}
 			}
 			}catch (Exception e) {
-				e.printStackTrace();
+				return testStepStatus=false;
 			}	
 		return testStepStatus;
 		}

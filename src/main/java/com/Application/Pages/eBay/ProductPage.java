@@ -139,7 +139,7 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 							LOGGER.info("No Results are displayed for search text");
 						}
 			}catch (Exception e) {
-				e.printStackTrace();
+				return testStepStatus=false;
 			}
 			
 	return testStepStatus;
@@ -159,7 +159,7 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 		if (checkForVisiblity(text_Slot, driver)) {
 			clickOn(driver, text_Slot);
 		}
-		int minVal=3;
+		int minVal=1;
 		int maxVal=totalResults.size();
 		LOGGER.info(maxVal);
 		int randomResult=(int) (Math.random()*(maxVal-minVal))+minVal;
@@ -177,7 +177,7 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 		LOGGER.info("Selected product's price is : "+itemPrice);
 		testStepStatus=true;
 	}catch (Exception e) {
-			e.printStackTrace();
+		return testStepStatus=false;
 		}
 		
 return testStepStatus;
@@ -209,7 +209,7 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 					clickOn(driver, filterOkBtn);
 				if (checkForVisiblity(filterDoneBtn, driver)) {
 					clickOn(driver, filterDoneBtn);
-					LOGGER.info("Going to Calibrate Filter");
+					LOGGER.info("Filter Calibrated");
 					testStepStatus=true;
 					waitUntilInvisible(pageLoad);
 				}else {
@@ -221,7 +221,7 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 		}	
 	
 	}catch (Exception e) {
-			e.printStackTrace();
+		return testStepStatus=false;
 		}
 		
 return testStepStatus;
@@ -264,7 +264,7 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 		
 		
 	}catch (Exception e) {
-			e.printStackTrace();
+			return testStepStatus=false;
 		}
 		
 return testStepStatus;
@@ -295,14 +295,14 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		}else{
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the checkout page");
 		}
-		if (checkForVisiblity(proceedToPay, driver)) {
+		if (checkForVisiblity(proceedToPay, driver) & testStepStatus) {
 			LOGGER.info("Proceed to Pay is Present");
 			clickOn(driver, proceedToPay);
 			testStepStatus=true;
 		}
 		
 	}catch (Exception e) {
-			e.printStackTrace();
+		return testStepStatus=false;
 		}
 		
 return testStepStatus;

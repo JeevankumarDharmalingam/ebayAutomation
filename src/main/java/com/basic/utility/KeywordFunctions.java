@@ -3,13 +3,12 @@ package com.basic.utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Driver;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+
 import java.util.Map;
-import java.util.Set;
+
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -19,41 +18,23 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
+
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.google.common.base.Function;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
-import io.appium.java_client.ios.IOSDriver;
+
 
 //extending mobile base test class to use update twb results method to update reports in internal methods
 public class KeywordFunctions extends ParentTest{
-	private static final int TIMEOUT_IN_SECONDS = 40;
 	private static final Logger LOGGER = Logger.getLogger(KeywordFunctions.class);
 	WebDriverWait wait;
 	public static long max=60;
@@ -211,7 +192,7 @@ Purpose of Method: To Swipe in any desired direction and speed
 
 			direction=direction.toLowerCase();
 			Dimension size;
-			int starty,endy,startx,scrWidth,scrHeight,rateToSwipe;			
+			int starty,startx,scrWidth,scrHeight,rateToSwipe;			
 			size=driver.manage().window().getSize();
 			scrWidth=size.getWidth();
 			scrHeight=size.getHeight();
