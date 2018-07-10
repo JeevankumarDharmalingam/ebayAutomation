@@ -17,4 +17,5 @@ public interface Constants {
 	public static final String UPI="UPI";
 	public static final String wallets_CashCards="Wallets / Cash Cards";
 	public static final String phonePe_BHIM="PhonePe / BHIM UPI";
+	public static final String EnterKey="Enter";
 }

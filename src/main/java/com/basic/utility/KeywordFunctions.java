@@ -3,14 +3,9 @@ package com.basic.utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.Iterator;
-
 import java.util.Map;
-
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,25 +13,18 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.appium.java_client.android.AndroidDriver;
-
-
-//extending mobile base test class to use update twb results method to update reports in internal methods
+import io.appium.java_client.android.AndroidKeyCode;
 public class KeywordFunctions extends ParentTest{
 	private static final Logger LOGGER = Logger.getLogger(KeywordFunctions.class);
-	WebDriverWait wait;
+	//WebDriverWait wait;
 	public static long max=60;
 	public static long med=30;
 	public static long min=10;
@@ -50,13 +38,13 @@ public class KeywordFunctions extends ParentTest{
 		}
 	}
 	
-	protected void enterTextValue(WebElement element, String text) {
+	protected static void enterTextValue(WebElement element, String text) {
 		LOGGER.info("Starting to Enter Text Value");
 		element.sendKeys(new CharSequence[] { text });
 		LOGGER.info("Entered " + text + " Successfully");
 	}
 	
-	protected void clickOn(WebDriver driver,WebElement element) {
+	protected static void clickOn(WebDriver driver,WebElement element) {
 		try{
 			WebElement el=element;
 			el.click();
@@ -66,7 +54,7 @@ public class KeywordFunctions extends ParentTest{
 			e2.click();
 		}
 	}
-	protected void clickOnText(String textToFind) {
+	protected static void clickOnText(String textToFind) {
 		try{
 			WebElement el=driver.findElement(By.xpath("//*[@text='"+textToFind+"']"));
 			el.click();
@@ -74,9 +62,6 @@ public class KeywordFunctions extends ParentTest{
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 	protected static boolean checkForVisiblity(WebElement locator, WebDriver driver)
     {
 
@@ -100,7 +85,7 @@ public class KeywordFunctions extends ParentTest{
 		}
 		return false;
 	}
-	public void swipe(WebDriver driver,String direction, String speed) throws InterruptedException
+	protected static void swipe(WebDriver driver,String direction, String speed) throws InterruptedException
 	{
 		try{
 
@@ -150,22 +135,7 @@ public class KeywordFunctions extends ParentTest{
 			}
 	}
 
-    public void waitUntilInvisible(WebElement webElement) {
-       try{
-    	/*boolean exit=false;
-    	do {
-			if (checkForVisiblity(webElement, driver)) {
-				wait(2);
-			}else{
-				exit=true;
-			}
-		} while (exit==false);*/
-       }catch (Exception e) {
-			e.printStackTrace();
-		}
-    }
- 
-    public static Map<String, String> getDataFromFiles(String detailInstanceName,String sheetName) {
+	public static Map<String, String> getDataFromFiles(String detailInstanceName,String sheetName) {
 		XSSFWorkbook myWorkBook = null;
 		Map<String, String> testdata = null;
 		File myFile =null;
@@ -178,7 +148,6 @@ public class KeywordFunctions extends ParentTest{
 			Iterator<Row> rowIterator = mySheet.iterator();
 			while (rowIterator.hasNext()) {
 				Row row = rowIterator.next();
-				// For each row, iterate through each columns
 				Iterator<Cell> cellIterator = row.cellIterator();
 				while (cellIterator.hasNext()) {
 					Cell cell = cellIterator.next();
@@ -247,7 +216,7 @@ public class KeywordFunctions extends ParentTest{
 		}
 		return testdata;
 	}
-    public static WebElement elemantToText(WebDriver driver,String text) {
+	protected static WebElement elemantToText(WebDriver driver,String text) {
     	WebElement element = null;
     	try {
     		 element=driver.findElement(By.xpath("//*[contains(@text,'"+text+"')]"));
@@ -256,7 +225,7 @@ public class KeywordFunctions extends ParentTest{
 		}
 		return element;
 }
-    public static String getScreenshot(WebDriver driver) {
+	public static String getScreenshot(WebDriver driver) {
 		TakesScreenshot ts=(TakesScreenshot) driver;
 		File src=ts.getScreenshotAs(OutputType.FILE);
 		String path=Constants.screenShotPath;
@@ -267,6 +236,19 @@ public class KeywordFunctions extends ParentTest{
 			
 		}
 		return path;
+	}
+	protected static String pressAndroidKeys(WebDriver driver,String keyName) {
+		try {
+			switch (keyName) {
+			case "Enter":{
+				((AndroidDriver) driver).pressKeyCode(AndroidKeyCode.ENTER);
+				break;
+			}
+			}
+		} catch (Exception e) {
+			
+		}
+		return "";
 	}
 
 }

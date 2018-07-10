@@ -27,9 +27,6 @@ public class LoginPage extends KeywordFunctions{
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
 	private WebElement gridBtn;
 	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	private WebElement pageLoad;
-	
 	@FindBy(xpath="//android.widget.Button[@text='MAYBE LATER']")
 	private WebElement mayBeLater;
 	
@@ -43,18 +40,17 @@ public class LoginPage extends KeywordFunctions{
 		PageFactory.initElements(driver, this);
 	}
 	
-/**********************************************************************************************************************************	
-	Name of Function		: LogIn
-	Purpose of Function	: To Log in with the given username and password and verify if the LogIn is successful
-		
-**********************************************************************************************************************************/	
-public boolean LogIn(WebDriver driver,String usernameText, String passwordText) throws Exception {
+/* -------------------------------------------------------------------------------------------------------------
+ 	Method Functionality - Navigates to About under settings menu
+	Author - Jeevankumar
+	Date -  6th Jan 18
+----------------------------------------------------------------------------------------------------------------*/
+	public boolean logIn_Into_App(WebDriver driver,String usernameText, String passwordText) throws Exception {
 		try {
 			testStepStatus = false;
 			if (checkForVisiblity(signInBtn, driver)) {
 				LOGGER.info("Sign In Button is Visible");
 				clickOn(driver,signInBtn);
-				waitUntilInvisible(pageLoad);
 				if(checkForVisiblity(userName, driver)) {
 					LOGGER.info("Logging in with UserName "+usernameText);
 					enterTextValue(userName, usernameText);
@@ -72,7 +68,6 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 			}else {
 				LOGGER.info("Sign In Button is Not Visible");
 			}
-			waitUntilInvisible(pageLoad);
 			if (checkForVisiblity(gridBtn, driver)) {
 				clickOn(driver, gridBtn);
 				if (checkForVisiblity(homeBtn, driver)) {

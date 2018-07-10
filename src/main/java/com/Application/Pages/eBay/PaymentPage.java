@@ -36,14 +36,13 @@ public class PaymentPage extends KeywordFunctions{
 	
 	public PaymentPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
-	
 	}
 	
-/**********************************************************************************************************************************	
-	Name of Function		: navigateToCardPaymnetType
-	Description	: Navigate to Payment type
-		
-**********************************************************************************************************************************/	
+/* -------------------------------------------------------------------------------------------------------------
+ 	Method Functionality - Navigate to the mentioned Payment type
+	Author - Jeevankumar
+	Date -  6th Jan 18
+----------------------------------------------------------------------------------------------------------------*/
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
 		wait(3);
@@ -94,10 +93,11 @@ public class PaymentPage extends KeywordFunctions{
 		}
 		return testStepStatus;
 	}
-/**********************************************************************************************************************************	
-	Name of Function		: UPIPayment
-	Description	: Make UPI Payment
-**********************************************************************************************************************************/	
+/* -------------------------------------------------------------------------------------------------------------
+ 	Method Functionality - This method handles UPI Payment Part
+	Author - Jeevankumar
+	Date -  6th Jan 18
+----------------------------------------------------------------------------------------------------------------*/
 	public boolean UPIPayment(String UPI) {
 		testStepStatus=false;
 		try {

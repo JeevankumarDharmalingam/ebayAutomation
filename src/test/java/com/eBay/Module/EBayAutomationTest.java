@@ -33,7 +33,7 @@ public class EBayAutomationTest extends ParentTest{
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
 		LoginPage eB=new LoginPage(driver);
-		testStepStatus=eB.LogIn(driver,testData.getUserName(),testData.getPassWord());
+		testStepStatus=eB.logIn_Into_App(driver,testData.getUserName(),testData.getPassWord());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "User logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
 			assertTrue(testStepStatus);
