@@ -23,53 +23,53 @@ public class PaymentPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(PaymentPage.class);
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	public WebElement pageLoad;
+	private WebElement pageLoad;
 	
 	@FindBy(xpath="//*[contains(@text,'Credit Card')]")
-	public WebElement creditCard;
+	private WebElement creditCard;
 	
 	@FindBy(xpath="//android.widget.RadioButton[@text='American Express']")
-	public WebElement cardType;
+	private WebElement cardType;
 	
 	@FindBy(xpath="//*[@resource-id='btnPay']")
-	public WebElement payBtn;
+	private WebElement payBtn;
 	
 	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[1]")
-	public WebElement cardNumber;
+	private WebElement cardNumber;
 	
 	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[2]")
-	public WebElement cardName;
+	private WebElement cardName;
 	
 	@FindBy(xpath="//android.widget.Spinner[@text='MM']")
-	public WebElement expiryMonth;
+	private WebElement expiryMonth;
 	
 	@FindBy(xpath="//android.widget.Spinner[@text='YY']")
-	public WebElement expiryYear;
+	private WebElement expiryYear;
 	
 	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[3]")
-	public WebElement cvv;
+	private WebElement cvv;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	public WebElement closePaymentPage;
+	private WebElement closePaymentPage;
 	
 	@FindBy(xpath="//*[@text='select address']")
-	public WebElement selectAddress;
+	private WebElement selectAddress;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	public WebElement home;
+	private WebElement home;
 	
 	
 	@FindBy(xpath="//android.widget.RadioButton")
-	public WebElement UPIRadioBtn;
+	private WebElement UPIRadioBtn;
 	
 	@FindBy(xpath="//*[@resource-id='vpAddress']")
-	public WebElement VPA;
+	private WebElement VPA;
 	
 	@FindBy(xpath="//*[@resource-id='vpAddress']//parent::android.view.View//following::android.view.View[1]/android.widget.Button")
-	public WebElement makePaymentBtn;
+	private WebElement makePaymentBtn;
 	
 	@FindBy(xpath="//*[@resource-id='vpAddress']//parent::android.view.View//preceding::android.view.View[1]")
-	public WebElement errorMsg;
+	private WebElement errorMsg;
 	
 
 	
@@ -148,11 +148,11 @@ public class PaymentPage extends KeywordFunctions{
 			waitUntilInvisible(pageLoad);
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
-				MobileappRefresh(driver);
+				//MobileappRefresh(driver);
 				wait(1);
 				clickOn(driver, makePaymentBtn);
 			}
-			wait(3);
+			wait(4);
 			if (checkForVisiblity(errorMsg,driver)) {
 				LOGGER.error("The error occured is "+errorMsg.getAttribute("text"));
 				LOGGER.info("Error message popped Up");

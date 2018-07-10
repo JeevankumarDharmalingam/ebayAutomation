@@ -13,34 +13,32 @@ import com.basic.utility.KeywordFunctions;
 public class LoginPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(LoginPage.class);
 	
-	public static String usernameText,passwordText;
-	
 	@FindBy(xpath="//android.widget.Button[@text='SIGN IN']")
-	public static WebElement sign_In_Btn;
+	private static WebElement sign_In_Btn;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/edit_text_username']")
-	public WebElement userName;
+	private WebElement userName;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/edit_text_password']")
-	public WebElement password;
+	private WebElement password;
 	
 	@FindBy(xpath="//*[@text='Home']")
-	public WebElement homeBtn;
+	private WebElement homeBtn;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	public WebElement homeButton;
+	private WebElement homeButton;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	public WebElement pageLoad;
+	private WebElement pageLoad;
 	
 	@FindBy(xpath="//android.widget.Button[@text='MAYBE LATER']")
-	public WebElement mayBeLater;
+	private WebElement mayBeLater;
 	
 	@FindBy(xpath="//android.widget.Button[@text='NOT NOW']")
-	public WebElement notNow;
+	private WebElement notNow;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_sign_in_status']")
-	public WebElement signInStatus;
+	private WebElement signInStatus;
 	
 	public LoginPage(WebDriver driver) {
 		this.driver=driver;
@@ -60,7 +58,6 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 		
 		try {
 			testStepStatus = false;
-			//waitForInvisibility(pageLoad);
 			if (checkForVisiblity(sign_In_Btn, driver)) {
 				LOGGER.info("Sign In Button is Visible");
 				clickOn(driver,sign_In_Btn);
@@ -71,8 +68,6 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 					enterTextValue(password, passwordText);
 				
 					clickOn(driver, sign_In_Btn);
-					//waitForInvisibility(pageLoad);
-				
 				if (checkForVisiblity(mayBeLater, driver)) {
 					clickOn(driver, mayBeLater);
 				}

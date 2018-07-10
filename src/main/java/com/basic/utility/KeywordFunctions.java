@@ -114,7 +114,6 @@ public class KeywordFunctions extends ParentTest{
 		try{
 			WebElement element1=driver.findElement(element);
 			element1.click();
-			//LOGGER.info("Clicked on element: " + element);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -174,7 +173,6 @@ public class KeywordFunctions extends ParentTest{
                     .until(ExpectedConditions.visibilityOf(locator)).isDisplayed();
             
         } catch (Exception e) {
-            // LOGGER.error(e);
         }
         return waitValue;
 
@@ -194,13 +192,10 @@ public class KeywordFunctions extends ParentTest{
 
         boolean waitValue = false;
         try {
-       //  WebElement element=;
-        						
-        	  waitValue = new WebDriverWait(driver, 8)
+     	  waitValue = new WebDriverWait(driver, 8)
                       .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(@text,'"+textToFind+"')]")))).isDisplayed();
             
         } catch (Exception e) {
-            // LOGGER.error(e);
         }
         return waitValue;
 
@@ -264,7 +259,6 @@ Purpose of Method: To Swipe in any desired direction and speed
 	Purpose of Method: To wait until an object disappears
 		
 **********************************************************************************************************************************/	
-
     
     public void waitUntilInvisible(WebElement webElement) {
        try{
@@ -305,15 +299,11 @@ Purpose of Method: To Swipe in any desired direction and speed
 		File myFile =null;
 		try {
 				 myFile = new File(Constants.dataSheetPath);
-			FileInputStream fis = new FileInputStream(myFile);
-			
+			FileInputStream fis = new FileInputStream(myFile);	
 			myWorkBook = new XSSFWorkbook(fis);
 			XSSFSheet mySheet;
-
 			mySheet = myWorkBook.getSheet(sheetName);
-			
 			Iterator<Row> rowIterator = mySheet.iterator();
-			
 			while (rowIterator.hasNext()) {
 				Row row = rowIterator.next();
 				// For each row, iterate through each columns
@@ -343,7 +333,6 @@ Purpose of Method: To Swipe in any desired direction and speed
 					TestColumn = "Available";
 					break;
 				}
-
 			}
 			if (TestColumn.equalsIgnoreCase("NotAvailable")) {
 				throw new RuntimeException("Data not supplied for " + detailInstanceName);
@@ -363,7 +352,6 @@ Purpose of Method: To Swipe in any desired direction and speed
 					testdataRow2[colIndex] = null;
 				}
 			}
-
 			int i = 0;
 			testdata = new HashMap<String, String>();
 			for (String cellvalue : firstRow) {
@@ -387,7 +375,7 @@ Purpose of Method: To Swipe in any desired direction and speed
 		}
 		return testdata;
 	}
-    public static void MobileappRefresh(WebDriver driver) {
+    public static void MobileappRefres(WebDriver driver) {
     	
 				LOGGER.info("Local device App refreshing");
 				((AndroidDriver) driver).pressKeyCode(187);
@@ -404,7 +392,7 @@ Purpose of Method: To Swipe in any desired direction and speed
 		try {
 			FileUtils.copyFile(src, destination, true);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		return path;
 	}

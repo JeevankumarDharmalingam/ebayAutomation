@@ -9,11 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
-
 import com.basic.utility.KeywordFunctions;
-
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
@@ -21,95 +17,94 @@ import io.appium.java_client.android.AndroidKeyCode;
 public class ProductPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(ProductPage.class);
 	public static int searchVal,randomResult;
-	public static String productName,itemDesc,itemPrice;
+	public static String productName,productDescription,itemPrice;
 	
 	public static String usernameText,passwordText;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/search_box']")
-	public WebElement searchBox;
+	private WebElement searchBox;
 	
 	@FindBy(xpath="//*[@text='Home']")
-	public WebElement home;
+	private WebElement home;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/text_slot_1']")
-	public WebElement text_Slot;
+	private WebElement text_Slot;
 
 	@FindBy(xpath="//android.widget.RelativeLayout[3]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")
-	public WebElement searchSelect;
+	private WebElement searchSelect;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_item_count']")
-	public WebElement searchResults;
+	private WebElement searchResults;
 	
 	@FindBy(xpath="//android.widget.Button[@text='BUY IT NOW']")
-	public WebElement buyItNow;
+	private WebElement buyItNow;
 	
 	@FindBy(xpath="//android.widget.Button[@text='REVIEW']")
-	public WebElement review;
+	private WebElement review;
 	
 	@FindBy(xpath="//android.widget.Button[@text='Proceed to Pay']")
-	public WebElement proceedToPay;
+	private WebElement proceedToPay;
 	
 	@FindBy(xpath="//*[contains(@text,'FILTER')]")
-	public WebElement filter;
+	private WebElement filter;
 	
 	@FindBy(xpath="//*[contains(@text,'Price range')]")
-	public WebElement priceRange;
+	private WebElement priceRange;
 	
 	@FindBy(xpath="//*[contains(@text,'Custom price range')]")
-	public WebElement customPriceRange;
+	private WebElement customPriceRange;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/minimum_price_view']")
-	public WebElement customMinPriceRange;
+	private WebElement customMinPriceRange;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/maximum_price_view']")
-	public WebElement customMaxPriceRange;
+	private WebElement customMaxPriceRange;
 	
 	@FindBy(xpath="//android.widget.Button[@text='OK']")
-	public WebElement filterOkBtn;
+	private WebElement filterOkBtn;
 	
 	@FindBy(xpath="//android.widget.Button[@text='DONE']")
-	public WebElement filterDoneBtn;
+	private WebElement filterDoneBtn;
 	
 	@FindBy(xpath="//*[contains(@text,'Credit Card')]")
-	public WebElement creditCard;
+	private WebElement creditCard;
 	
 	@FindBy(xpath="//android.widget.RadioButton[@text='American Express']")
-	public WebElement cardType;
+	private WebElement cardType;
 	
 	@FindBy(xpath="//*[@resource-id='btnPay']")
-	public WebElement payBtn;
+	private WebElement payBtn;
 	
 	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[1]")
-	public WebElement cardNumber;
+	private WebElement cardNumber;
 	
 	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[2]")
-	public WebElement cardName;
+	private WebElement cardName;
 	
 	@FindBy(xpath="//android.widget.Spinner[@text='MM']")
-	public WebElement expiryMonth;
+	private WebElement expiryMonth;
 	
 	@FindBy(xpath="//android.widget.Spinner[@text='YY']")
-	public WebElement expiryYear;
+	private WebElement expiryYear;
 	
 	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[3]")
-	public WebElement cvv;
+	private WebElement cvv;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	public WebElement closePaymentPage;
+	private WebElement closePaymentPage;
 	
 	@FindBy(xpath="//*[@text='select address']")
-	public WebElement selectAddress;
+	private WebElement selectAddress;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	public WebElement pageLoad;
+	private WebElement pageLoad;
 	
 	@FindAll(@FindBy(xpath = "//*[@resource-id='com.ebay.mobile:id/cell_collection_item']"))
-	List<WebElement> totalResults;
+	private List<WebElement> totalResults;
 	
 	public ProductPage(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
-	
 	}
 	
 
@@ -118,7 +113,6 @@ public class ProductPage extends KeywordFunctions{
 	Description	: To search product with the given data
 		
 **********************************************************************************************************************************/	
-
 public boolean searchProduct(WebDriver driver, String searchText) throws Exception {
 		
 		
@@ -128,12 +122,10 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 				if (checkForVisiblity(searchBox, driver)) {
 					enterTextValue(searchBox, searchText);
 					((AndroidDriver) driver).pressKeyCode(AndroidKeyCode.ENTER);
-				}
-				
+				}			
 				if (checkForVisiblity(pageLoad, driver)) {
 					wait(5);
-				}
-				
+				}				
 				if (checkForVisiblity(text_Slot, driver)) {
 					clickOn(driver, text_Slot);
 				}
@@ -146,7 +138,6 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 						}else{
 							LOGGER.info("No Results are displayed for search text");
 						}
-					
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -178,7 +169,7 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 		LOGGER.info(randomResult);
 		WebElement itemName=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/textview_item_title']"));
 		productName=itemName.getAttribute("text");
-		itemDesc=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/shipping_text']")).getAttribute("text");
+		productDescription=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/shipping_text']")).getAttribute("text");
 		itemPrice=driver.findElement(By.xpath("//*[@resource-id='com.ebay.mobile:id/recycler']//android.widget.RelativeLayout["+randomResult+"]//android.widget.RelativeLayout[1]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")).getAttribute("text");	
 		clickOn(driver, itemName);
 		waitUntilInvisible(pageLoad);
@@ -205,6 +196,7 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 		testStepStatus = false;
 		if (checkForVisiblity(filter, driver)) {
 			clickOn(driver, filter);
+			LOGGER.info("Going to Calibrate Filter");
 			if (checkForVisiblity(priceRange, driver)) {
 				clickOn(driver, priceRange);
 				clickOn(driver, customPriceRange);
@@ -213,11 +205,11 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 					clickOn(driver, customMaxPriceRange);
 					customMaxPriceRange.sendKeys(maxPrice);
 				}
-				//((AndroidDriver) driver).getPageSource();
 				if (checkForVisiblity(filterOkBtn, driver)) 
 					clickOn(driver, filterOkBtn);
 				if (checkForVisiblity(filterDoneBtn, driver)) {
 					clickOn(driver, filterDoneBtn);
+					LOGGER.info("Going to Calibrate Filter");
 					testStepStatus=true;
 					waitUntilInvisible(pageLoad);
 				}else {
@@ -293,7 +285,7 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		driver.getPageSource();
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
-		MobileappRefresh(driver);
+		//MobileappRefresh(driver);
 		wait(2);
 		WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName.substring(5,27)+"')]"));
 		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice.substring(2)+"')]"));
