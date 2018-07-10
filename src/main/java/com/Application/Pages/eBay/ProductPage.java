@@ -201,6 +201,7 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		testStepStatus = false;
 		waitUntilInvisible(pageLoadIcon);
 		if(checkForVisiblity(proceedToPayBtn, driver)) {
+			wait(4);
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
 		wait(2);

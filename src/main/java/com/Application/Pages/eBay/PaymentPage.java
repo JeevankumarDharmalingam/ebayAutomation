@@ -14,14 +14,8 @@ import com.basic.utility.KeywordFunctions;
 public class PaymentPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(PaymentPage.class);
 	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	private WebElement pageLoadIcon;
-	
-	@FindBy(xpath="//*[contains(@text,'Credit Card')]")
-	private WebElement creditCard;
-	
-	@FindBy(xpath="//android.widget.RadioButton[@text='American Express']")
-	private WebElement cardType;
+	@FindBy(xpath=".//*[contains(@text,'Choose your payment method')]​")
+	private WebElement paymentPage;
 	
 	@FindBy(xpath="//*[@resource-id='btnPay']")
 	private WebElement payBtn;
@@ -52,7 +46,10 @@ public class PaymentPage extends KeywordFunctions{
 **********************************************************************************************************************************/	
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
-		waitUntilInvisible(pageLoadIcon);
+		wait(3);
+		if(checkForVisiblity(paymentPage, driver)) {
+			LOGGER.info("Landed in Payment Page");
+		}
 		try {
 			LOGGER.info("Proceeding with the payment type "+paymentType);
 			switch (paymentType) {
@@ -108,7 +105,7 @@ public class PaymentPage extends KeywordFunctions{
 				clickOn(driver, UPIRadioBtn);
 				clickOn(driver, payBtn);
 			}
-			waitUntilInvisible(pageLoadIcon);
+			wait(4);
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
 				wait(1);
