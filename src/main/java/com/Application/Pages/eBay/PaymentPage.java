@@ -105,7 +105,7 @@ public class PaymentPage extends KeywordFunctions{
 				clickOn(driver, UPIRadioBtn);
 				clickOn(driver, payBtn);
 			}
-			wait(4);
+			wait(3);
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
 				wait(1);

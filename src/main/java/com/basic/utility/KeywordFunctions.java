@@ -242,6 +242,7 @@ public class KeywordFunctions extends ParentTest{
 			switch (keyName) {
 			case "Enter":{
 				((AndroidDriver) driver).pressKeyCode(AndroidKeyCode.ENTER);
+				LOGGER.info(keyName+" is pressed");
 				break;
 			}
 			}

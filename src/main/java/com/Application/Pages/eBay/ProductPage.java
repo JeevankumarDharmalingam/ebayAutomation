@@ -149,7 +149,11 @@ Date -  6th Jan 18
 public boolean verifyProductPage(WebDriver driver) throws Exception {
 	try {
 		testStepStatus = false;
-		driver.getPageSource();
+		if(checkForVisiblity(proceedToPayBtn, driver)) {
+			LOGGER.info("Successfully Landed in Product Page");
+		}else {
+			wait(4);
+		}	
 		WebElement itemName=elemantToText(driver, productName);
 		WebElement productPrice=elemantToText(driver, itemPrice);
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
@@ -190,7 +194,7 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 	try {
 		testStepStatus = false;
 		if(checkForVisiblity(proceedToPayBtn, driver)) {
-			
+			LOGGER.info("Successfully landed in Checkout Page");
 		}else {
 			wait(4);
 		}	
