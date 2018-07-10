@@ -13,7 +13,7 @@ public class LoginPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(LoginPage.class);
 	
 	@FindBy(xpath="//android.widget.Button[@text='SIGN IN']")
-	private static WebElement sign_In_Btn;
+	private static WebElement signInBtn;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/edit_text_username']")
 	private WebElement userName;
@@ -25,7 +25,7 @@ public class LoginPage extends KeywordFunctions{
 	private WebElement homeBtn;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	private WebElement homeButton;
+	private WebElement gridBtn;
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
 	private WebElement pageLoad;
@@ -49,20 +49,18 @@ public class LoginPage extends KeywordFunctions{
 		
 **********************************************************************************************************************************/	
 public boolean LogIn(WebDriver driver,String usernameText, String passwordText) throws Exception {
-		
-		
 		try {
 			testStepStatus = false;
-			if (checkForVisiblity(sign_In_Btn, driver)) {
+			if (checkForVisiblity(signInBtn, driver)) {
 				LOGGER.info("Sign In Button is Visible");
-				clickOn(driver,sign_In_Btn);
+				clickOn(driver,signInBtn);
 				waitUntilInvisible(pageLoad);
 				if(checkForVisiblity(userName, driver)) {
 					LOGGER.info("Logging in with UserName "+usernameText);
 					enterTextValue(userName, usernameText);
 					enterTextValue(password, passwordText);
 				
-					clickOn(driver, sign_In_Btn);
+					clickOn(driver, signInBtn);
 					LOGGER.info("Clicked on SignIn Button");
 				}
 				if (checkForVisiblity(mayBeLater, driver)) {
@@ -75,9 +73,9 @@ public boolean LogIn(WebDriver driver,String usernameText, String passwordText) 
 				LOGGER.info("Sign In Button is Not Visible");
 			}
 			waitUntilInvisible(pageLoad);
-			if (checkForVisiblity(homeButton, driver)) {
-				clickOn(driver, homeButton);
-				if (checkForVisiblity(signInStatus, driver)) {
+			if (checkForVisiblity(gridBtn, driver)) {
+				clickOn(driver, gridBtn);
+				if (checkForVisiblity(homeBtn, driver)) {
 					testStepStatus=true;
 					clickOn(driver,homeBtn);
 					LOGGER.info("User is logged in Successfully");

@@ -154,16 +154,12 @@ Description	: To take the order entry till payment window
 **********************************************************************************************************************************/	
 
 public boolean verifyProductPage(WebDriver driver) throws Exception {
-	
-	
 	try {
 		testStepStatus = false;
 		waitUntilInvisible(pageLoadIcon);
 		driver.getPageSource();
 		WebElement itemName=elemantToText(driver, productName);
 		WebElement productPrice=elemantToText(driver, itemPrice);
-		/*WebElement itemName=driver.findElement(By.xpath("//*[contains(@text,'"+productName+"')]"));
-		WebElement productPrice =driver.findElement(By.xpath("//*[contains(@text,'"+itemPrice+"')]"));*/
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the  product page");

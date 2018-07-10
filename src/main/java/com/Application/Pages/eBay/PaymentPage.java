@@ -15,7 +15,7 @@ public class PaymentPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(PaymentPage.class);
 	
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/progress_bar']")
-	private WebElement pageLoad;
+	private WebElement pageLoadIcon;
 	
 	@FindBy(xpath="//*[contains(@text,'Credit Card')]")
 	private WebElement creditCard;
@@ -25,32 +25,7 @@ public class PaymentPage extends KeywordFunctions{
 	
 	@FindBy(xpath="//*[@resource-id='btnPay']")
 	private WebElement payBtn;
-	
-	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[1]")
-	private WebElement cardNumber;
-	
-	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[2]")
-	private WebElement cardName;
-	
-	@FindBy(xpath="//android.widget.Spinner[@text='MM']")
-	private WebElement expiryMonth;
-	
-	@FindBy(xpath="//android.widget.Spinner[@text='YY']")
-	private WebElement expiryYear;
-	
-	@FindBy(xpath="(//*[@id='CreditCardDetailsForm']/*/*[@class='android.widget.EditText'])[3]")
-	private WebElement cvv;
-	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	private WebElement closePaymentPage;
-	
-	@FindBy(xpath="//*[@text='select address']")
-	private WebElement selectAddress;
-	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/home']")
-	private WebElement home;
-	
-	
+
 	@FindBy(xpath="//android.widget.RadioButton")
 	private WebElement UPIRadioBtn;
 	
@@ -79,7 +54,7 @@ public class PaymentPage extends KeywordFunctions{
 
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
-		waitUntilInvisible(pageLoad);
+		waitUntilInvisible(pageLoadIcon);
 		try {
 			LOGGER.info("Proceeding with the payment type "+paymentType);
 			switch (paymentType) {
@@ -127,19 +102,16 @@ public class PaymentPage extends KeywordFunctions{
 	}
 /**********************************************************************************************************************************	
 	Name of Function		: UPIPayment
-	Description	: Make UPI Paymenr
-		
+	Description	: Make UPI Payment
 **********************************************************************************************************************************/	
-
 	public boolean UPIPayment(String UPI) {
-		
 		testStepStatus=false;
 		try {
 			if(checkForVisiblity(UPIRadioBtn, driver)) {
 				clickOn(driver, UPIRadioBtn);
 				clickOn(driver, payBtn);
 			}
-			waitUntilInvisible(pageLoad);
+			waitUntilInvisible(pageLoadIcon);
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
 				wait(1);
