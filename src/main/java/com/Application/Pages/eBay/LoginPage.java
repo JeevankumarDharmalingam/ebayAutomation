@@ -55,7 +55,7 @@ public class LoginPage extends KeywordFunctions{
 					LOGGER.info("Logging in with UserName "+usernameText);
 					enterTextValue(userName, usernameText);
 					enterTextValue(password, passwordText);
-				
+					LOGGER.info("Credentials entered Successfully");
 					clickOn(driver, signInBtn);
 					LOGGER.info("Clicked on SignIn Button");
 				}
@@ -67,15 +67,18 @@ public class LoginPage extends KeywordFunctions{
 				}
 			}else {
 				LOGGER.info("Sign In Button is Not Visible");
+				return false;
 			}
 			if (checkForVisiblity(gridBtn, driver)) {
 				clickOn(driver, gridBtn);
+				LOGGER.info("Clicked on Menu Button");
 				if (checkForVisiblity(homeBtn, driver)) {
 					testStepStatus=true;
 					clickOn(driver,homeBtn);
 					LOGGER.info("User is logged in Successfully");
 				}else{
 					LOGGER.info("User is not logged in Successfully");
+					return false;
 				}
 			}
 			}catch (Exception e) {

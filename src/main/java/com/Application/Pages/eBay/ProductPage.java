@@ -12,25 +12,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
 
 
 public class ProductPage extends KeywordFunctions{
 	private static final Logger LOGGER = Logger.getLogger(ProductPage.class);
 	private static String productName,itemPrice;
-	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/search_box']")
-	private WebElement searchBar;
-	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/text_slot_1']")
-	private WebElement msg_Info;
-
-	@FindBy(xpath="//android.widget.RelativeLayout[3]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")
-	private WebElement searchSelect;
-	
-	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_item_count']")
-	private WebElement searchResults;
 	
 	@FindBy(xpath="//android.widget.Button[contains(@text,'BUY IT NOW')]")
 	private WebElement buyItNowBtn;
@@ -43,6 +29,18 @@ public class ProductPage extends KeywordFunctions{
 	
 	@FindBy(xpath="//*[contains(@text,'FILTER')]")
 	private WebElement filterBtn;
+	
+	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/search_box']")
+	private WebElement searchBar;
+	
+	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/text_slot_1']")
+	private WebElement msg_Info;
+
+	@FindBy(xpath="//android.widget.RelativeLayout[3]//*[@resource-id='com.ebay.mobile:id/textview_item_price']")
+	private WebElement searchSelect;
+	
+	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_item_count']")
+	private WebElement searchResults;
 	
 	@FindBy(xpath="//*[contains(@text,'Price range')]")
 	private WebElement priceRange;
@@ -240,8 +238,6 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 				if (checkForVisiblity(minPriceRange, driver)) {
 					enterTextValue(minPriceRange, minPrice);
 					enterTextValue(maxPriceRange, maxPrice);
-					/*minPriceRange.sendKeys(minPrice);
-					maxPriceRange.sendKeys(maxPrice);*/
 				}
 				if (checkForVisiblity(filterOkBtn, driver)) 
 					clickOn(driver, filterOkBtn);
