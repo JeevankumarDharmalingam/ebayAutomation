@@ -9,7 +9,10 @@ public class TestDataClass {
 
 	private String userName;
 	private String passWord;
+	private String invalidUserName;
+	private String invalidPassword;
 	private String searchText;
+	private String sortType;
 	private String minPriceRange;
 	private String maxPriceRange;
 	private String paymentType;
@@ -24,7 +27,10 @@ public class TestDataClass {
 		Map<String, String> testData = KeywordFunctions.getDataFromFiles(page,Constants.excelTestDataPage);
 		this.userName=testData.get("userName");
 		this.passWord=testData.get("passWord");
+		this.invalidUserName=testData.get("invalidUserName");
+		this.invalidPassword=testData.get("invalidPassword");
 		this.searchText=testData.get("searchText");
+		this.sortType=testData.get("sortType");
 		this.paymentType=testData.get("paymentType");
 		this.UPI=testData.get("UPI");
 		this.minPriceRange=testData.get("minPriceRange");
@@ -36,6 +42,35 @@ public class TestDataClass {
 		this.creditCardCvv=testData.get("creditCardCvv");
 	}
 	
+	
+	public String getSortType() {
+		return sortType;
+	}
+
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
+
+
+	public String getMinPriceRange() {
+		return minPriceRange;
+	}
+
+
+	public void setMinPriceRange(String minPriceRange) {
+		this.minPriceRange = minPriceRange;
+	}
+
+
+	public String getMaxPriceRange() {
+		return maxPriceRange;
+	}
+
+
+	public void setMaxPriceRange(String maxPriceRange) {
+		this.maxPriceRange = maxPriceRange;
+	}
 	
 	public String getMinPrice() {
 		return minPriceRange;
@@ -117,6 +152,30 @@ public class TestDataClass {
 	public String getUserName() {
 		return userName;
 	}
+
+	
+	public String getInvalidUserName() {
+		return invalidUserName;
+	}
+
+
+	public void setInvalidUserName(String invalidUserName) {
+		this.invalidUserName = invalidUserName;
+	}
+
+
+	public String getInvalidPassword() {
+		return invalidPassword;
+	}
+
+
+	public void setInvalidPassword(String invalidPassword) {
+		this.invalidPassword = invalidPassword;
+	}
+
+
+	
+
 
 	public void setUserName(String userName) {
 		this.userName = userName;

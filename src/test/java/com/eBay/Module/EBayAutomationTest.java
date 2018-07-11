@@ -28,6 +28,23 @@ public class EBayAutomationTest extends ParentTest{
 	TestDataClass testData;
 	
 	@Test(priority=0)
+	public void eBay_InvalidLogin() throws Exception {
+		try{
+		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
+		startReportingTest(methodName);
+		LoginPage eB=new LoginPage(driver);
+		testStepStatus=eB.invalidLogin(testData.getInvalidUserName(),testData.getInvalidPassword());
+		if (testStepStatus) {
+			logger.log(Status.PASS, "User is not allowed to login with invalid credentials :"+testData.getInvalidUserName()+" and password :"+testData.getInvalidPassword());
+		}else{
+			logger.log(Status.FAIL, "User is allowed to login with invalid credentials :"+testData.getInvalidUserName()+" and password :"+testData.getInvalidPassword());
+			assertEquals(testStepStatus, true);
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Test(priority=1)
 	public void eBay_Login() throws Exception {
 		try{
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
@@ -36,7 +53,6 @@ public class EBayAutomationTest extends ParentTest{
 		testStepStatus=eB.logIn_Into_App(driver,testData.getUserName(),testData.getPassWord());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "User logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
-			assertTrue(testStepStatus);
 		}else{
 			logger.log(Status.FAIL, "User is not logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
 			assertEquals(testStepStatus, true);
@@ -45,7 +61,7 @@ public class EBayAutomationTest extends ParentTest{
 			e.printStackTrace();
 		}
 	}
-	@Test(priority=1,dependsOnMethods={"eBay_Login"})
+	@Test(priority=2,dependsOnMethods={"eBay_Login"})
 	public void searchAndPlaceOrder() throws Exception {
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
@@ -55,25 +71,27 @@ public class EBayAutomationTest extends ParentTest{
 			
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Search operation was successful with the following search data :"+testData.getSearchText());
-				assertTrue(testStepStatus);
 			}else{
 				logger.log(Status.FAIL, "Search operation was unsuccessful with the following search data :"+testData.getSearchText());
 				assertEquals(testStepStatus, true);
 			}
-			
 			testStepStatus=eBPP.calibratePriceFilter(testData.getMinPrice(), testData.getMaxPrice());
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Filter is set between range "+testData.getMinPrice()+" and "+testData.getMaxPrice());
-				assertTrue(testStepStatus);
 			}else{
 				logger.log(Status.FAIL, "Setting price range filter is failed");
 				assertEquals(testStepStatus, true);
 			}
-			
+			testStepStatus=eBPP.sortProducts(testData.getSortType());
+			if (testStepStatus) {
+				logger.log(Status.PASS, "Sorting is Done Based on "+testData.getSortType());
+			}else{
+				logger.log(Status.FAIL, "Error while Sorting the products");
+				assertEquals(testStepStatus, true);
+			}
 			testStepStatus=eBPP.selectingSearchResults(driver);
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Selection of random product from the search results was successful");
-				assertTrue(testStepStatus);
 			}else{
 				logger.log(Status.FAIL, "Selection of random product from the search results was unsuccessful");
 				assertEquals(testStepStatus, true);
@@ -82,7 +100,6 @@ public class EBayAutomationTest extends ParentTest{
 			testStepStatus=eBPP.verifyProductPage(driver);
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Order was reviewed and successfully proceeded to checkout page");
-				assertTrue(testStepStatus);
 			}else{
 				logger.log(Status.FAIL, "Order was not proceeded till payment page");
 				assertEquals(testStepStatus, true);
@@ -90,7 +107,6 @@ public class EBayAutomationTest extends ParentTest{
 			testStepStatus=eBPP.verifyCheckoutPage(driver);
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Order was reviewed and information is verified and then successfully proceeded till payment page");
-				assertTrue(testStepStatus);
 			}else{
 				logger.log(Status.FAIL, "Order was not proceeded till payment page");
 				assertEquals(testStepStatus, true);
@@ -99,27 +115,23 @@ public class EBayAutomationTest extends ParentTest{
 			e.printStackTrace();
 		}
 	}
-	@Test(priority=2,dependsOnMethods={"searchAndPlaceOrder"})
-	public void paymentValidation() {
+	@Test(priority=3,dependsOnMethods={"searchAndPlaceOrder"})
+	public void invalidPaymentValidation() {
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
 		PaymentPage payment=new PaymentPage(driver);
 		testStepStatus=payment.navigateToCardPaymnetType(testData.getPaymentType());
-		//testStepStatus=payment.processCardPayment(driver,testData.getCreditCardNumber(),testData.getCreditCardName(),testData.getCreditCardExpiryMonth(),testData.getCreditCardExpiryYear(),testData.getCreditCardCvv());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "Payment navigation was successful");
-			//assertTrue(stepResult);
 		}else{
 			logger.log(Status.FAIL, "Payment navigation was unsuccessful as payment details were not given");
 			assertEquals(testStepStatus, true);
 		}
-		testStepStatus=payment.UPIPayment(testData.getUPI());
-		//testStepStatus=payment.processCardPayment(driver,testData.getCreditCardNumber(),testData.getCreditCardName(),testData.getCreditCardExpiryMonth(),testData.getCreditCardExpiryYear(),testData.getCreditCardCvv());
+		testStepStatus=payment.inavlidUPIPayment(testData.getUPI());
 		if (testStepStatus) {
-			logger.log(Status.PASS, "Payment operation through UPI was successful");
-			//assertTrue(stepResult);
+			logger.log(Status.PASS, "Payment operation through UPI was unsuccessful because of incorrect UPI");
 		}else{
-			logger.log(Status.FAIL, "Payment operation through UPI was unsuccessful as payment details were incorrect");
+			logger.log(Status.FAIL, "Payment operation through UPI was successful since incorrect UPI");
 			assertEquals(testStepStatus, true);
 		}
 	}

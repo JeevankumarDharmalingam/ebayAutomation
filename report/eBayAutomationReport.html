@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Jul 10, 2018 01:45:52 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Jul 11, 2018 08:08:20 PM</span>
 				</a>
 			</li>
 			<li>
@@ -72,7 +72,6 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
-						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -123,10 +122,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='66.667%'><span class='strong'>2</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>4</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='33.333%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -138,10 +137,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='77.778%'><span class='strong'>7</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>10</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='22.222%'>2</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -158,15 +157,15 @@
 				
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>eBay_Login</span>
-						<span class='test-time'>Jul 10, 2018 01:45:53 PM</span>
+						<span class='test-name'>eBay_InvalidLogin</span>
+						<span class='test-time'>Jul 11, 2018 08:08:20 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jul 10, 2018 01:45:53 PM</span>
-	<span class='label end-time'>Jul 10, 2018 01:46:42 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 49s+801ms</span>
+	<span class='label start-time'>Jul 11, 2018 08:08:20 PM</span>
+	<span class='label end-time'>Jul 11, 2018 08:08:44 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 24s+434ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -180,8 +179,8 @@
 			<tbody>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:46:42 PM</td>
-					<td class='step-details'>User logged in successfully with the following Username :automationtesting@gmail.com and password :Testing01</td>
+					<td class='timestamp'>8:08:44 PM</td>
+					<td class='step-details'>User is not allowed to login with invalid credentials :automation@gmail.com and password :Testing05</td>
 				</tr>
 			</tbody>
 		</table>
@@ -192,15 +191,15 @@
 				
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
 					<div class='test-heading'>
-						<span class='test-name'>searchAndPlaceOrder</span>
-						<span class='test-time'>Jul 10, 2018 01:46:42 PM</span>
+						<span class='test-name'>eBay_Login</span>
+						<span class='test-time'>Jul 11, 2018 08:08:44 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jul 10, 2018 01:46:42 PM</span>
-	<span class='label end-time'>Jul 10, 2018 01:49:05 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 2m 22s+369ms</span>
+	<span class='label start-time'>Jul 11, 2018 08:08:44 PM</span>
+	<span class='label end-time'>Jul 11, 2018 08:09:19 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 34s+703ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -214,27 +213,66 @@
 			<tbody>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:47:18 PM</td>
+					<td class='timestamp'>8:09:19 PM</td>
+					<td class='step-details'>User logged in successfully with the following Username :automationtesting@gmail.com and password :Testing01</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>searchAndPlaceOrder</span>
+						<span class='test-time'>Jul 11, 2018 08:09:19 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jul 11, 2018 08:09:19 PM</span>
+	<span class='label end-time'>Jul 11, 2018 08:11:06 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 47s+125ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>8:09:44 PM</td>
 					<td class='step-details'>Search operation was successful with the following search data :65-inch tv</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:47:51 PM</td>
+					<td class='timestamp'>8:10:07 PM</td>
 					<td class='step-details'>Filter is set between range 50000 and 100000</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:48:11 PM</td>
+					<td class='timestamp'>8:10:14 PM</td>
+					<td class='step-details'>Sorting is Done Based on Highest Price</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>8:10:25 PM</td>
 					<td class='step-details'>Selection of random product from the search results was successful</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:48:45 PM</td>
+					<td class='timestamp'>8:10:43 PM</td>
 					<td class='step-details'>Order was reviewed and successfully proceeded to checkout page</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:49:05 PM</td>
+					<td class='timestamp'>8:11:06 PM</td>
 					<td class='step-details'>Order was reviewed and information is verified and then successfully proceeded till payment page</td>
 				</tr>
 			</tbody>
@@ -244,17 +282,17 @@
 				</li>
 				
 				
-				<li class='test displayed active  fail' status='fail' bdd='false' test-id='3'>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
 					<div class='test-heading'>
-						<span class='test-name'>paymentValidation</span>
-						<span class='test-time'>Jul 10, 2018 01:49:05 PM</span>
-						<span class='test-status right fail'>fail</span>
+						<span class='test-name'>invalidPaymentValidation</span>
+						<span class='test-time'>Jul 11, 2018 08:11:06 PM</span>
+						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jul 10, 2018 01:49:05 PM</span>
-	<span class='label end-time'>Jul 10, 2018 01:49:51 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 46s+382ms</span>
+	<span class='label start-time'>Jul 11, 2018 08:11:06 PM</span>
+	<span class='label end-time'>Jul 11, 2018 08:11:45 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 38s+878ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -268,18 +306,13 @@
 			<tbody>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>1:49:10 PM</td>
+					<td class='timestamp'>8:11:18 PM</td>
 					<td class='step-details'>Payment navigation was successful</td>
 				</tr>
-				<tr class='log' status='fail'>
-					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-					<td class='timestamp'>1:49:48 PM</td>
-					<td class='step-details'>Payment operation through UPI was unsuccessful as payment details were incorrect</td>
-				</tr>
-				<tr class='log' status='fail'>
-					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-					<td class='timestamp'>1:49:51 PM</td>
-					<td class='step-details'>expected [true] but found [false]<img data-featherlight='C:\Users\jeevan.kumar02\Downloads\ebayAssaignment\ebayAssaignmentProject/screenshots/error.png' width='10%' src='C:\Users\jeevan.kumar02\Downloads\ebayAssaignment\ebayAssaignmentProject/screenshots/error.png' data-src='C:\Users\jeevan.kumar02\Downloads\ebayAssaignment\ebayAssaignmentProject/screenshots/error.png'></td>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>8:11:45 PM</td>
+					<td class='step-details'>Payment operation through UPI was unsuccessful because of incorrect UPI</td>
 				</tr>
 			</tbody>
 		</table>
@@ -321,31 +354,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>3</div>
+					<div class='panel-lead'>4</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>9</div>
+					<div class='panel-lead'>10</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jul 10, 2018 01:45:52 PM</div>
+					<div class='panel-lead'>Jul 11, 2018 08:08:20 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jul 10, 2018 01:49:51 PM</div>
+			 		<div class='panel-lead'>Jul 11, 2018 08:11:45 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 3m 58s+697ms</div>
+					<div class='panel-lead'>0h 3m 25s+279ms</div>
 				</div>
 			</div>
 		</div>
@@ -358,22 +391,22 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 2,
-				failParent: 1,
+				passParent: 4,
+				failParent: 0,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 1,
+				exceptionsParent: 0,
 				
-				passChild: 7,
-				failChild: 2,
+				passChild: 10,
+				failChild: 0,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				exceptionsChild: 2,
+				exceptionsChild: 0,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,

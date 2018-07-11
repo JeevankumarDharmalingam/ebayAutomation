@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeMethod;
 
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
@@ -54,6 +55,9 @@ public class ProductPage extends KeywordFunctions{
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/maximum_price_view']")
 	private WebElement maxPriceRange;
 	
+	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/button_sort']")
+	private WebElement sortBtn;
+
 	@FindBy(xpath="//android.widget.Button[@text='OK']")
 	private WebElement filterOkBtn;
 	
@@ -71,7 +75,7 @@ public class ProductPage extends KeywordFunctions{
 /* -------------------------------------------------------------------------------------------------------------
  	Method Functionality - Search Product with Given Text
 	Author - Jeevankumar
-	Date -  6th Jan 18
+	Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
 public boolean searchProduct(WebDriver driver, String searchText) throws Exception {
 		
@@ -81,7 +85,7 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 			
 				if (checkForVisiblity(searchBar, driver)) {
 					enterTextValue(searchBar, searchText);
-					pressAndroidKeys(driver, Constants.EnterKey);
+					pressAndroidKeys(driver, Constants.enterKey);
 				}						
 				if (checkForVisiblity(msg_Info, driver)) {
 					clickOn(driver, msg_Info);
@@ -105,7 +109,7 @@ public boolean searchProduct(WebDriver driver, String searchText) throws Excepti
 /* -------------------------------------------------------------------------------------------------------------
 Method Functionality - Selecting random product from the list populated
 Author - Jeevankumar
-Date -  6th Jan 18
+Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
 public boolean selectingSearchResults(WebDriver driver) throws Exception {
 	
@@ -115,7 +119,7 @@ public boolean selectingSearchResults(WebDriver driver) throws Exception {
 		if (checkForVisiblity(msg_Info, driver)) {
 			clickOn(driver, msg_Info);
 		}
-		int minVal=1;
+		int minVal=2;
 		int maxVal=totalResults.size();
 		LOGGER.info("Maximum results in page "+maxVal);
 		int randomResult=(int) (Math.random()*(maxVal-minVal))+minVal;
@@ -142,7 +146,7 @@ return testStepStatus;
 /* -------------------------------------------------------------------------------------------------------------
 Method Functionality - Verify Product Page and proceed to checkout page
 Author - Jeevankumar
-Date -  6th Jan 18
+Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
 public boolean verifyProductPage(WebDriver driver) throws Exception {
 	try {
@@ -160,7 +164,6 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 		}else{
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the  product page");
 		}
-		
 		if (checkForVisiblity(buyItNowBtn, driver)) {
 			LOGGER.info("buy It Now is Present");
 			clickOn(driver, buyItNowBtn);
@@ -184,7 +187,7 @@ return testStepStatus;
 /* -------------------------------------------------------------------------------------------------------------
 Method Functionality - Verify Checkout Page and lands up in Payment Page
 Author - Jeevankumar
-Date -  6th Jan 18
+Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
 public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 	
@@ -198,8 +201,8 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		}	
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
-		wait(1);
-		WebElement itemName=elemantToText(driver, productName.substring(3, 26));
+		wait(2);
+		WebElement itemName=elemantToText(driver, productName.substring(3, 24));
 		WebElement productPrice=elemantToText(driver, itemPrice.substring(2));
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
 			testStepStatus=true;
@@ -223,8 +226,58 @@ return testStepStatus;
 /* -------------------------------------------------------------------------------------------------------------
 Method Functionality - Set Price Filter Range
 Author - Jeevankumar
-Date -  6th Jan 18
+Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
+public boolean sortProducts(String sortingType) throws Exception {
+	
+	try {
+		testStepStatus = false;
+		if (checkForVisiblity(sortBtn, driver)) {
+			LOGGER.info("Sort Button is Visible");
+			clickOn(driver, sortBtn);
+		}
+		wait(3);
+		switch (sortingType) {
+		case "Highest Price":{
+			clickOnText(Constants.highestPrice);
+			testStepStatus=true;
+			break;
+		}
+		case "Lowest Price":{
+			clickOnText(Constants.lowestPrice);
+			testStepStatus=true;
+			break;
+		}
+		case "Best Match":{
+			clickOnText(Constants.bestMatch);
+			testStepStatus=true;
+			break;
+		}
+		case "Ending Soon":{
+			clickOnText(Constants.endingSoon);
+			testStepStatus=true;
+			break;
+		}
+		case "Newly listed":{
+			clickOnText(Constants.newlyListed);
+			testStepStatus=true;
+			break;
+		}
+		case "Nearest":{
+			clickOnText(Constants.nearestFirst);
+			testStepStatus=true;
+			break;
+		}
+		}
+	
+	}catch (Exception e) {
+		e.printStackTrace();
+		return testStepStatus=false;
+		}
+		
+return testStepStatus;
+		}
+
 public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exception {
 	
 	try {
@@ -259,6 +312,11 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 		
 return testStepStatus;
 		}
+@BeforeMethod(alwaysRun=true)
+public void name() {
+	LOGGER.info("Step Status Set to False");
+	testStepStatus=false;
+}
 
 }
 

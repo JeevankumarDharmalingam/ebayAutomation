@@ -17,5 +17,12 @@ public interface Constants {
 	public static final String UPI="UPI";
 	public static final String wallets_CashCards="Wallets / Cash Cards";
 	public static final String phonePe_BHIM="PhonePe / BHIM UPI";
-	public static final String EnterKey="Enter";
+	public static final String enterKey="Enter";
+	public static final String bestMatch="Best Match";
+	public static final String lowestPrice="Lowest Price + Postage";
+	public static final String highestPrice="Highest Price + Postage";
+	public static final String endingSoon="Ending Soonest";
+	public static final String newlyListed="Newly listed";
+	public static final String nearestFirst="Nearest First";
+	
 }

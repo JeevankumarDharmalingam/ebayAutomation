@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeMethod;
 
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
@@ -41,7 +42,7 @@ public class PaymentPage extends KeywordFunctions{
 /* -------------------------------------------------------------------------------------------------------------
  	Method Functionality - Navigate to the mentioned Payment type
 	Author - Jeevankumar
-	Date -  6th Jan 18
+	Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
@@ -96,9 +97,9 @@ public class PaymentPage extends KeywordFunctions{
 /* -------------------------------------------------------------------------------------------------------------
  	Method Functionality - This method handles UPI Payment Part
 	Author - Jeevankumar
-	Date -  6th Jan 18
+	Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-	public boolean UPIPayment(String UPI) {
+	public boolean inavlidUPIPayment(String UPI) {
 		testStepStatus=false;
 		try {
 			if(checkForVisiblity(UPIRadioBtn, driver)) {
@@ -118,15 +119,21 @@ public class PaymentPage extends KeywordFunctions{
 			if (checkForVisiblity(errorMsg,driver)) {
 				LOGGER.error("The error occured is "+errorMsg.getAttribute("text"));
 				LOGGER.info("Error message popped Up");
-				testStepStatus=false;
+				testStepStatus=true;
 			}else {
 				LOGGER.info("Error message not popped Up");
-				testStepStatus=true;
+				testStepStatus=false;
 			}
 		} catch (Exception e) {
 			return testStepStatus=false;
 		}
 		return testStepStatus;
+	}
+	
+	@BeforeMethod
+	public void name() {
+		LOGGER.info("Step Status Set to False");
+		testStepStatus=false;
 	}
 
 
