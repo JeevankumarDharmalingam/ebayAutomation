@@ -1,7 +1,6 @@
 package com.eBay.Module;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import org.apache.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
