@@ -54,37 +54,37 @@ public class PaymentPage extends KeywordFunctions{
 			LOGGER.info("Proceeding with the payment type "+paymentType);
 			switch (paymentType) {
 			case "CreditCard":{
-				clickOnText(Constants.creditCard);
+				clickOnExactText(Constants.creditCard);
 				testStepStatus=true;
 				break;
 			}
 			case "DebitCard":{
-				clickOnText(Constants.debitCard);
+				clickOnExactText(Constants.debitCard);
 				testStepStatus=true;
 				break;
 			}
 			case "NetBanking":{
-				clickOnText(Constants.netBanking);
+				clickOnExactText(Constants.netBanking);
 				testStepStatus=true;
 				break;
 			}
 			case "CreditCardEMI":{
-				clickOnText(Constants.creditCard_EMI);
+				clickOnExactText(Constants.creditCard_EMI);
 				testStepStatus=true;
 				break;
 			}
 			case "UPI":{
-				clickOnText(Constants.UPI);
+				clickOnExactText(Constants.UPI);
 				testStepStatus=true;
 				break;
 			}
 			case "Wallets_CashCards":{
-				clickOnText(Constants.wallets_CashCards);
+				clickOnExactText(Constants.wallets_CashCards);
 				testStepStatus=true;
 				break;
 			}
 			case "PhonePe_BHIM":{
-				clickOnText(Constants.phonePe_BHIM);
+				clickOnExactText(Constants.phonePe_BHIM);
 				testStepStatus=true;
 				break;
 			}

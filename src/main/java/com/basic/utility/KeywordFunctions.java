@@ -54,9 +54,17 @@ public class KeywordFunctions extends ParentTest{
 			e2.click();
 		}
 	}
-	protected static void clickOnText(String textToFind) {
+	protected static void clickOnExactText(String textToFind) {
 		try{
 			WebElement el=driver.findElement(By.xpath("//*[@text='"+textToFind+"']"));
+			el.click();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	protected static void clickOnContainsText(String textToFind) {
+		try{
+			WebElement el=driver.findElement(By.xpath("//*[contains(@text,'"+textToFind+"')]"));
 			el.click();
 		}catch(Exception e){
 			e.printStackTrace();

@@ -239,32 +239,32 @@ public boolean sortProducts(String sortingType) throws Exception {
 		wait(3);
 		switch (sortingType) {
 		case "Highest Price":{
-			clickOnText(Constants.highestPrice);
+			clickOnContainsText(Constants.highestPrice);
 			testStepStatus=true;
 			break;
 		}
 		case "Lowest Price":{
-			clickOnText(Constants.lowestPrice);
+			clickOnContainsText(Constants.lowestPrice);
 			testStepStatus=true;
 			break;
 		}
 		case "Best Match":{
-			clickOnText(Constants.bestMatch);
+			clickOnContainsText(Constants.bestMatch);
 			testStepStatus=true;
 			break;
 		}
 		case "Ending Soon":{
-			clickOnText(Constants.endingSoon);
+			clickOnContainsText(Constants.endingSoon);
 			testStepStatus=true;
 			break;
 		}
 		case "Newly listed":{
-			clickOnText(Constants.newlyListed);
+			clickOnContainsText(Constants.newlyListed);
 			testStepStatus=true;
 			break;
 		}
 		case "Nearest":{
-			clickOnText(Constants.nearestFirst);
+			clickOnContainsText(Constants.nearestFirst);
 			testStepStatus=true;
 			break;
 		}
