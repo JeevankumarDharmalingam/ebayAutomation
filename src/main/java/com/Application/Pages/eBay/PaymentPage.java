@@ -46,7 +46,6 @@ public class PaymentPage extends KeywordFunctions{
 ----------------------------------------------------------------------------------------------------------------*/
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
-		wait(3);
 		if(checkForVisiblity(paymentPage, driver)) {
 			LOGGER.info("Landed in Payment Page");
 		}
@@ -106,16 +105,13 @@ public class PaymentPage extends KeywordFunctions{
 				clickOn(driver, UPIRadioBtn);
 				clickOn(driver, payBtn);
 			}
-			wait(3);
 			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
-				wait(1);
 				clickOn(driver, makePaymentBtn);
 				if (checkForVisiblity(makePaymentBtn, driver)) {
 					clickOn(driver, makePaymentBtn);
 				}
 			}
-			wait(4);
 			if (checkForVisiblity(errorMsg,driver)) {
 				LOGGER.error("The error occured is "+errorMsg.getAttribute("text"));
 				LOGGER.info("Error message popped Up");

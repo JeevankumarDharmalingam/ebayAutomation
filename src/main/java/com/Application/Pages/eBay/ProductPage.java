@@ -154,7 +154,7 @@ public boolean verifyProductPage(WebDriver driver) throws Exception {
 		if(checkForVisiblity(proceedToPayBtn, driver)) {
 			LOGGER.info("Successfully Landed in Product Page");
 		}else {
-			wait(4);
+			
 		}	
 		WebElement itemName=elemantToText(driver, productName);
 		WebElement productPrice=elemantToText(driver, itemPrice);
@@ -197,11 +197,9 @@ public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
 		if(checkForVisiblity(proceedToPayBtn, driver)) {
 			LOGGER.info("Successfully landed in Checkout Page");
 		}else {
-			wait(4);
 		}	
 		swipe(driver, "up", "fast");
 		swipe(driver, "up", "fast");
-		wait(2);
 		WebElement itemName=elemantToText(driver, productName.substring(3, 24));
 		WebElement productPrice=elemantToText(driver, itemPrice.substring(2));
 		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
@@ -236,7 +234,6 @@ public boolean sortProducts(String sortingType) throws Exception {
 			LOGGER.info("Sort Button is Visible");
 			clickOn(driver, sortBtn);
 		}
-		wait(3);
 		switch (sortingType) {
 		case "Highest Price":{
 			clickOnContainsText(Constants.highestPrice);

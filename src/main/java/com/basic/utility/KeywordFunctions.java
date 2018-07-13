@@ -29,15 +29,6 @@ public class KeywordFunctions extends ParentTest{
 	public static long med=30;
 	public static long min=10;
 	
-	protected static void wait(int timeOutInSeconds) {
-		LOGGER.info("Wait for "+timeOutInSeconds+" seconds");
-		try {
-			Thread.sleep(timeOutInSeconds * 1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	protected static void enterTextValue(WebElement element, String text) {
 		LOGGER.info("Starting to Enter Text Value");
 		element.sendKeys(new CharSequence[] { text });
