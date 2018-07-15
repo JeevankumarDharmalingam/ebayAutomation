@@ -24,7 +24,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 public class KeywordFunctions extends ParentTest{
 	private static final Logger LOGGER = Logger.getLogger(KeywordFunctions.class);
-	//WebDriverWait wait;
 	public static long max=60;
 	public static long med=30;
 	public static long min=10;
@@ -66,7 +65,7 @@ public class KeywordFunctions extends ParentTest{
 
         boolean waitValue = false;
         try {
-            waitValue = new WebDriverWait(driver, 8)
+            waitValue = new WebDriverWait(driver,7 )
                     .until(ExpectedConditions.visibilityOf(locator)).isDisplayed();
             
         } catch (Exception e) {
@@ -74,16 +73,6 @@ public class KeywordFunctions extends ParentTest{
         return waitValue;
 
     }
-	
-	protected static boolean isElementVisible(WebElement element) {
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, 5);
-	        wait.until(ExpectedConditions.visibilityOf(element));
-		}catch (Exception e) {
-			e.getMessage();
-		}
-		return false;
-	}
 	protected static void swipe(WebDriver driver,String direction, String speed) throws InterruptedException
 	{
 		try{

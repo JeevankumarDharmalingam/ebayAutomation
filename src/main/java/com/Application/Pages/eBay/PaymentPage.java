@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
 
-public class PaymentPage extends KeywordFunctions{
+public class PaymentPage extends KeywordFunctions implements PaymentImpl{
 	private static final Logger LOGGER = Logger.getLogger(PaymentPage.class);
 	
 	@FindBy(xpath=".//*[contains(@text,'Choose your payment method')]​")
@@ -98,7 +98,7 @@ public class PaymentPage extends KeywordFunctions{
 	Author - Jeevankumar
 	Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-	public boolean inavlidUPIPayment(String UPI) {
+	public Boolean inavlidUPIPayment(String UPI) {
 		testStepStatus=false;
 		try {
 			if(checkForVisiblity(UPIRadioBtn, driver)) {
@@ -125,14 +125,6 @@ public class PaymentPage extends KeywordFunctions{
 		}
 		return testStepStatus;
 	}
-	
-	@BeforeMethod
-	public void name() {
-		LOGGER.info("Step Status Set to False");
-		testStepStatus=false;
-	}
-
-
 }
 
 

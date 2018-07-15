@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import com.basic.utility.KeywordFunctions;
 
 
-public class LoginPage extends KeywordFunctions{
+public class LoginPage extends KeywordFunctions implements LoginImpl{
 	private static final Logger LOGGER = Logger.getLogger(LoginPage.class);
 	
 	@FindBy(xpath="//android.widget.Button[contains(@text,'SIGN IN')]")
@@ -49,8 +49,9 @@ public class LoginPage extends KeywordFunctions{
 	Author - Jeevankumar
 	Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-	public boolean logIn_Into_App(WebDriver driver,String usernameText, String passwordText) throws Exception {
+	public boolean logIn_Into_App(String usernameText, String passwordText){
 		try {
+			testStepStatus=false;
 			if (checkForVisiblity(signInBtn, driver)) {
 				if (checkForVisiblity(userName, driver)) {
 					LOGGER.info("Landed in SignIn Page");
@@ -89,12 +90,13 @@ public class LoginPage extends KeywordFunctions{
 				}
 			}
 			}catch (Exception e) {
-				return testStepStatus=false;
+				return false;
 			}	
 		return testStepStatus;
 		}
 	
 	public boolean invalidLogin(String invalidUsernameText, String invalidPasswordText) {
+		testStepStatus=false;
 		try {
 			if (checkForVisiblity(signInBtn, driver)) {
 				LOGGER.info("Sign In Button is Present");
@@ -119,11 +121,6 @@ public class LoginPage extends KeywordFunctions{
 				return false;
 			}	
 		return testStepStatus;
-	}
-	@BeforeMethod
-	public void name() {
-		LOGGER.info("Step Status Set to False");
-		testStepStatus=false;
 	}
 }
 

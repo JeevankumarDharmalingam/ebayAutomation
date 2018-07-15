@@ -15,7 +15,7 @@ import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
 
 
-public class ProductPage extends KeywordFunctions{
+public class ProductPage extends KeywordFunctions implements ProductImpl{
 	private static final Logger LOGGER = Logger.getLogger(ProductPage.class);
 	private static String productName,itemPrice;
 	
@@ -77,7 +77,7 @@ public class ProductPage extends KeywordFunctions{
 	Author - Jeevankumar
 	Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-public boolean searchProduct(WebDriver driver, String searchText) throws Exception {
+public boolean searchProduct(String searchText){
 		
 		
 		try {
@@ -111,7 +111,7 @@ Method Functionality - Selecting random product from the list populated
 Author - Jeevankumar
 Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-public boolean selectingSearchResults(WebDriver driver) throws Exception {
+public boolean selectingSearchResults(){
 	
 	
 	try {
@@ -148,7 +148,7 @@ Method Functionality - Verify Product Page and proceed to checkout page
 Author - Jeevankumar
 Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-public boolean verifyProductPage(WebDriver driver) throws Exception {
+public boolean verifyProductPage(){
 	try {
 		testStepStatus = false;
 		if(checkForVisiblity(proceedToPayBtn, driver)) {
@@ -189,7 +189,7 @@ Method Functionality - Verify Checkout Page and lands up in Payment Page
 Author - Jeevankumar
 Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-public boolean verifyCheckoutPage(WebDriver driver) throws Exception {
+public boolean verifyCheckoutPage(){
 	
 	
 	try {
@@ -226,7 +226,7 @@ Method Functionality - Set Price Filter Range
 Author - Jeevankumar
 Date -  6th Jul 18
 ----------------------------------------------------------------------------------------------------------------*/
-public boolean sortProducts(String sortingType) throws Exception {
+public boolean sortProducts(String sortingType){
 	
 	try {
 		testStepStatus = false;
@@ -275,7 +275,7 @@ public boolean sortProducts(String sortingType) throws Exception {
 return testStepStatus;
 		}
 
-public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exception {
+public boolean calibratePriceFilter(String minPrice, String maxPrice){
 	
 	try {
 		testStepStatus = false;
@@ -309,12 +309,6 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice) throws Exc
 		
 return testStepStatus;
 		}
-@BeforeMethod(alwaysRun=true)
-public void name() {
-	LOGGER.info("Step Status Set to False");
-	testStepStatus=false;
-}
-
 }
 
 

@@ -10,11 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import com.Application.Pages.eBay.LoginPage;
-import com.Application.Pages.eBay.PaymentPage;
-import com.Application.Pages.eBay.ProductPage;
+import com.Application.Pages.eBay.LoginImpl;
+import com.Application.Pages.eBay.PaymentImpl;
+import com.Application.Pages.eBay.ProductImpl;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import com.basic.factory.EbayAutomationFactory;
 import com.basic.utility.KeywordFunctions;
 import com.basic.utility.ParentTest;
 
@@ -31,7 +32,7 @@ public class EBayAutomationTest extends ParentTest{
 		try{
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
-		LoginPage eB=new LoginPage(driver);
+		LoginImpl eB=EbayAutomationFactory.createLoginPageInstance(driver);
 		testStepStatus=eB.invalidLogin(testData.getInvalidUserName(),testData.getInvalidPassword());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "User is not allowed to login with invalid credentials :"+testData.getInvalidUserName()+" and password :"+testData.getInvalidPassword());
@@ -48,8 +49,8 @@ public class EBayAutomationTest extends ParentTest{
 		try{
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
-		LoginPage eB=new LoginPage(driver);
-		testStepStatus=eB.logIn_Into_App(driver,testData.getUserName(),testData.getPassWord());
+		LoginImpl eB=EbayAutomationFactory.createLoginPageInstance(driver);
+		testStepStatus=eB.logIn_Into_App(testData.getUserName(),testData.getPassWord());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "User logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
 		}else{
@@ -64,9 +65,9 @@ public class EBayAutomationTest extends ParentTest{
 	public void searchAndPlaceOrder() throws Exception {
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
-		ProductPage eBPP=new ProductPage(driver);
+		ProductImpl eBPP=EbayAutomationFactory.createProductPageInstance(driver);
 		try {
-			testStepStatus=eBPP.searchProduct(driver,testData.getSearchText());
+			testStepStatus=eBPP.searchProduct(testData.getSearchText());
 			
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Search operation was successful with the following search data :"+testData.getSearchText());
@@ -88,7 +89,7 @@ public class EBayAutomationTest extends ParentTest{
 				logger.log(Status.FAIL, "Error while Sorting the products");
 				assertEquals(testStepStatus, true);
 			}
-			testStepStatus=eBPP.selectingSearchResults(driver);
+			testStepStatus=eBPP.selectingSearchResults();
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Selection of random product from the search results was successful");
 			}else{
@@ -96,14 +97,14 @@ public class EBayAutomationTest extends ParentTest{
 				assertEquals(testStepStatus, true);
 			}
 			
-			testStepStatus=eBPP.verifyProductPage(driver);
+			testStepStatus=eBPP.verifyProductPage();
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Order was reviewed and successfully proceeded to checkout page");
 			}else{
 				logger.log(Status.FAIL, "Order was not proceeded till payment page");
 				assertEquals(testStepStatus, true);
 			}
-			testStepStatus=eBPP.verifyCheckoutPage(driver);
+			testStepStatus=eBPP.verifyCheckoutPage();
 			if (testStepStatus) {
 				logger.log(Status.PASS, "Order was reviewed and information is verified and then successfully proceeded till payment page");
 			}else{
@@ -118,7 +119,7 @@ public class EBayAutomationTest extends ParentTest{
 	public void invalidPaymentValidation() {
 		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
 		startReportingTest(methodName);
-		PaymentPage payment=new PaymentPage(driver);
+		PaymentImpl payment=EbayAutomationFactory.createPaymentPageInstance(driver);
 		testStepStatus=payment.navigateToCardPaymnetType(testData.getPaymentType());
 		if (testStepStatus) {
 			logger.log(Status.PASS, "Payment navigation was successful");
