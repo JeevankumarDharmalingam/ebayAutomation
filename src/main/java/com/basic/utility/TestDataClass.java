@@ -1,11 +1,8 @@
-package dataUtility;
+package com.basic.utility;
 
 import java.util.Map;
 
-import com.basic.utility.Constants;
-import com.basic.utility.KeywordFunctions;
-
-public class TestDataClass {
+public class TestDataClass implements TestDataClassImpl{
 
 	private String userName;
 	private String passWord;

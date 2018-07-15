@@ -18,14 +18,13 @@ import com.aventstack.extentreports.Status;
 import com.basic.factory.EbayAutomationFactory;
 import com.basic.utility.KeywordFunctions;
 import com.basic.utility.ParentTest;
-
-
-import dataUtility.TestDataClass;
+import com.basic.utility.TestDataClass;
+import com.basic.utility.TestDataClassImpl;
 
 public class EBayAutomationTest extends ParentTest{
 	
 	private static final Logger LOGGER = Logger.getLogger(EBayAutomationTest.class);
-	TestDataClass testData;
+	TestDataClassImpl testData;
 	
 	@Test(priority=0)
 	public void eBay_InvalidLogin() throws Exception {
@@ -40,6 +39,7 @@ public class EBayAutomationTest extends ParentTest{
 			logger.log(Status.FAIL, "User is allowed to login with invalid credentials :"+testData.getInvalidUserName()+" and password :"+testData.getInvalidPassword());
 			assertEquals(testStepStatus, true);
 		}
+		endReportingTest(methodName);
 		}catch (Exception e) {
 		}
 	}
@@ -56,6 +56,7 @@ public class EBayAutomationTest extends ParentTest{
 			logger.log(Status.FAIL, "User is not logged in successfully with the following Username :"+testData.getUserName()+" and password :"+testData.getPassWord());
 			assertEquals(testStepStatus, true);
 		}
+		endReportingTest(methodName);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,28 +111,35 @@ public class EBayAutomationTest extends ParentTest{
 				logger.log(Status.FAIL, "Order was not proceeded till payment page");
 				assertEquals(testStepStatus, true);
 			}
+			endReportingTest(methodName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	@Test(priority=3,dependsOnMethods={"searchAndPlaceOrder"})
 	public void invalidPaymentValidation() {
-		String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
-		startReportingTest(methodName);
-		PaymentImpl payment=EbayAutomationFactory.createPaymentPageInstance(driver);
-		testStepStatus=payment.navigateToCardPaymnetType(testData.getPaymentType());
-		if (testStepStatus) {
-			logger.log(Status.PASS, "Payment navigation was successful");
-		}else{
-			logger.log(Status.FAIL, "Payment navigation was unsuccessful as payment details were not given");
-			assertEquals(testStepStatus, true);
-		}
-		testStepStatus=payment.inavlidUPIPayment(testData.getUPI());
-		if (testStepStatus) {
-			logger.log(Status.PASS, "Payment operation through UPI was unsuccessful because of incorrect UPI");
-		}else{
-			logger.log(Status.FAIL, "Payment operation through UPI was successful since incorrect UPI");
-			assertEquals(testStepStatus, true);
+		try {
+			String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
+			startReportingTest(methodName);
+			PaymentImpl payment=EbayAutomationFactory.createPaymentPageInstance(driver);
+			testStepStatus=payment.navigateToCardPaymnetType(testData.getPaymentType());
+			if (testStepStatus) {
+				logger.log(Status.PASS, "Payment navigation was successful");
+			}else{
+				logger.log(Status.FAIL, "Payment navigation was unsuccessful as payment details were not given");
+				assertEquals(testStepStatus, true);
+			}
+			testStepStatus=payment.inavlidUPIPayment(testData.getUPI());
+			if (testStepStatus) {
+				logger.log(Status.PASS, "Payment operation through UPI was unsuccessful because of incorrect UPI");
+			}else{
+				logger.log(Status.FAIL, "Payment operation through UPI was successful since incorrect UPI");
+				assertEquals(testStepStatus, true);
+			}
+			endReportingTest(methodName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	@BeforeSuite
@@ -149,26 +157,23 @@ public class EBayAutomationTest extends ParentTest{
 	 public void startReport(ITestContext testContext) throws Exception{
 		try {
 			System.out.println("Test Name "+testContext.getName());
-			testData=new TestDataClass(testContext.getName());
+			testData=EbayAutomationFactory.createTestDataClassInstance(testContext.getName());
 			startReportingInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 	 }
-	@AfterMethod
-	public void getResult(ITestResult result){
+	@AfterMethod(alwaysRun=true)
+	public void getResult(ITestResult result,ITestContext testContext){
 		try {
 			if(result.getStatus() == ITestResult.FAILURE){
 				String temp=KeywordFunctions.getScreenshot(driver);
 				logger.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
-			}else {
-				String temp=KeywordFunctions.getScreenshot(driver);
-				logger.log(Status.PASS, "Step ScreenSnap	", MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
 			}
 		} catch (Exception e) {		
 		}
 	}
-	@AfterTest
+	@AfterTest(alwaysRun=true)
 	public void endReport(){
 		LOGGER.info("Report is getting pushed");
 	               extent.flush();

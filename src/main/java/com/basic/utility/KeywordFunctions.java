@@ -65,7 +65,7 @@ public class KeywordFunctions extends ParentTest{
 
         boolean waitValue = false;
         try {
-            waitValue = new WebDriverWait(driver,8)
+            waitValue = new WebDriverWait(driver,6)
                     .until(ExpectedConditions.visibilityOf(locator)).isDisplayed();
             
         } catch (Exception e) {
@@ -216,7 +216,19 @@ public class KeywordFunctions extends ParentTest{
 	public static String getScreenshot(WebDriver driver) {
 		TakesScreenshot ts=(TakesScreenshot) driver;
 		File src=ts.getScreenshotAs(OutputType.FILE);
-		String path=Constants.screenShotPath;
+		String path=Constants.screenShotPath+"error.png";
+		File destination = new File(path);
+		try {
+			FileUtils.copyFile(src, destination, true);
+		} catch (Exception e) {
+			
+		}
+		return path;
+	}
+	public static String getScreenshot(WebDriver driver,String path) {
+		TakesScreenshot ts=(TakesScreenshot) driver;
+		File src=ts.getScreenshotAs(OutputType.FILE);
+		path=Constants.screenShotPath+path+".png";
 		File destination = new File(path);
 		try {
 			FileUtils.copyFile(src, destination, true);

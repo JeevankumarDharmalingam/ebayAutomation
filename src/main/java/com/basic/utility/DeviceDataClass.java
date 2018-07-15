@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.basic.utility.Constants;
 
-public class DeviceDataClass {
+public class DeviceDataClass implements DeviceDataClassImpl{
 
 	private String applicationName;
 	private String appPackage;

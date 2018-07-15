@@ -2,13 +2,18 @@ package com.basic.utility;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.basic.factory.EbayAutomationFactory;
+
 import io.appium.java_client.android.AndroidDriver;
 
 
@@ -16,7 +21,7 @@ public class ParentTest {
 	protected static final Logger LOGGER = Logger.getLogger(ParentTest.class);
 	public static WebDriver driver=null;
 	public String application=System.getProperty("application");
-	private DeviceDataClass deviceData;
+	private DeviceDataClassImpl deviceData;
 	public boolean testStepStatus;
 	protected ExtentHtmlReporter htmlReporter;
 	protected ExtentReports extent;
@@ -28,7 +33,7 @@ public class ParentTest {
 	}
 	
 	 public ParentTest() {
-			 deviceData=new DeviceDataClass(application);
+			 deviceData=EbayAutomationFactory.createDeviceDataClassInstance(application);
 	}
 	 public void startReportingInstance() {
 		 	htmlReporter = new ExtentHtmlReporter(Constants.reportPath);
@@ -39,7 +44,9 @@ public class ParentTest {
 	 public void startReportingTest(String methodInstance) {
 		 logger = extent.createTest(methodInstance);	
 	}
-	
+	 public void endReportingTest(String methodInstance) throws Exception {
+			logger.info("Step Snapshot", MediaEntityBuilder.createScreenCaptureFromPath(KeywordFunctions.getScreenshot(driver, methodInstance)).build());
+	}
 public  WebDriver getDriver() throws InterruptedException, Exception {
 	
 	
