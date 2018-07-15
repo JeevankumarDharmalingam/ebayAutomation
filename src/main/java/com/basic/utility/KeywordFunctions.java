@@ -65,7 +65,7 @@ public class KeywordFunctions extends ParentTest{
 
         boolean waitValue = false;
         try {
-            waitValue = new WebDriverWait(driver,7 )
+            waitValue = new WebDriverWait(driver,8)
                     .until(ExpectedConditions.visibilityOf(locator)).isDisplayed();
             
         } catch (Exception e) {

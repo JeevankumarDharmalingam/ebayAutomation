@@ -41,7 +41,6 @@ public class EBayAutomationTest extends ParentTest{
 			assertEquals(testStepStatus, true);
 		}
 		}catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	@Test(priority=1)
@@ -162,9 +161,11 @@ public class EBayAutomationTest extends ParentTest{
 			if(result.getStatus() == ITestResult.FAILURE){
 				String temp=KeywordFunctions.getScreenshot(driver);
 				logger.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
+			}else {
+				String temp=KeywordFunctions.getScreenshot(driver);
+				logger.log(Status.PASS, "Step ScreenSnap	", MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {		
 		}
 	}
 	@AfterTest
