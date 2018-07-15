@@ -196,9 +196,9 @@ public boolean verifyCheckoutPage(){
 		testStepStatus = false;
 		if(checkForVisiblity(proceedToPayBtn, driver)) {
 			LOGGER.info("Successfully landed in Checkout Page");
-		}else {
-		}	
-		swipe(driver, "up", "fast");
+		}else if (checkForVisiblity(proceedToPayBtn, driver)) {
+			LOGGER.info("Successfully landed in Checkout Page");
+		}
 		swipe(driver, "up", "fast");
 		WebElement itemName=elemantToText(driver, productName.substring(3, 24));
 		WebElement productPrice=elemantToText(driver, itemPrice.substring(2));
@@ -209,6 +209,7 @@ public boolean verifyCheckoutPage(){
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the checkout page");
 		}
 		if (checkForVisiblity(proceedToPayBtn, driver) & testStepStatus) {
+			swipe(driver, "up", "fast");
 			LOGGER.info("Proceed to Pay is Present");
 			clickOn(driver, proceedToPayBtn);
 			testStepStatus=true;
