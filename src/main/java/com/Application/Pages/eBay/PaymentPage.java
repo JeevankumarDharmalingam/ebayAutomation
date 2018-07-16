@@ -4,11 +4,8 @@ package com.Application.Pages.eBay;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.BeforeMethod;
-
 import com.basic.utility.Constants;
 import com.basic.utility.KeywordFunctions;
 

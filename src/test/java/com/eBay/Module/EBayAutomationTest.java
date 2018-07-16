@@ -18,7 +18,6 @@ import com.aventstack.extentreports.Status;
 import com.basic.factory.EbayAutomationFactory;
 import com.basic.utility.KeywordFunctions;
 import com.basic.utility.ParentTest;
-import com.basic.utility.TestDataClass;
 import com.basic.utility.TestDataClassImpl;
 
 public class EBayAutomationTest extends ParentTest{

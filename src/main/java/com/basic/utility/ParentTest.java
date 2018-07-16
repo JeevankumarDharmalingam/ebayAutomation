@@ -2,7 +2,6 @@ package com.basic.utility;
 
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +9,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.basic.factory.EbayAutomationFactory;
-
 import io.appium.java_client.android.AndroidDriver;
 
 
@@ -63,6 +60,8 @@ public  WebDriver getDriver() throws InterruptedException, Exception {
 					capability.setCapability("app", new File(Constants.applicationPath));
 					capability.setCapability("appPackage",deviceData.getAppPackage());
 					capability.setCapability("appActivity",deviceData.getAppActivity());
+					capability.setCapability("unicodeKeyboard", true);
+					capability.setCapability("resetKeyboard", true);
 					LOGGER.info("Driver instantiated with port no "+deviceData.getPortNo());
 					driver = new AndroidDriver(new URL("http://0.0.0.0:"+deviceData.getPortNo()+"/wd/hub"),capability);
 		}catch(Exception e) {
