@@ -60,7 +60,7 @@ public class KeywordFunctions extends ParentTest{
 			e.printStackTrace();
 		}
 	}
-	protected static boolean checkForVisiblity(WebElement locator, WebDriver driver)
+	protected static boolean checkForVisiblity(WebElement locator)
     {
 
         boolean waitValue = false;

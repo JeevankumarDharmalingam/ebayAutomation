@@ -81,11 +81,11 @@ public boolean searchProduct(String searchText){
 		try {
 			testStepStatus = false;
 			
-				if (checkForVisiblity(searchBar, driver)) {
+				if (checkForVisiblity(searchBar)) {
 					enterTextValue(searchBar, searchText);
 					pressAndroidKeys(driver, Constants.enterKey);
 				}						
-				if (checkForVisiblity(msg_Info, driver)) {
+				if (checkForVisiblity(msg_Info)) {
 					clickOn(driver, msg_Info);
 				}
 					String searchResult=searchResults.getAttribute("text");
@@ -114,7 +114,7 @@ public boolean selectingSearchResults(){
 	
 	try {
 		testStepStatus = false;
-		if (checkForVisiblity(msg_Info, driver)) {
+		if (checkForVisiblity(msg_Info)) {
 			clickOn(driver, msg_Info);
 		}
 		int minVal=2;
@@ -149,23 +149,23 @@ Date -  6th Jul 18
 public boolean verifyProductPage(){
 	try {
 		testStepStatus = false;
-		if(checkForVisiblity(proceedToPayBtn, driver)) {
+		if(checkForVisiblity(proceedToPayBtn)) {
 			LOGGER.info("Successfully Landed in Product Page");
 		}else {
 			
 		}	
 		WebElement itemName=elemantToText(driver, productName);
 		WebElement productPrice=elemantToText(driver, itemPrice);
-		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
+		if (checkForVisiblity(itemName) && checkForVisiblity(productPrice))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the  product page");
 		}else{
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the  product page");
 		}
-		if (checkForVisiblity(buyItNowBtn, driver)) {
+		if (checkForVisiblity(buyItNowBtn)) {
 			LOGGER.info("buy It Now is Present");
 			clickOn(driver, buyItNowBtn);
-			if (checkForVisiblity(reviewBtn, driver) & testStepStatus) {
+			if (checkForVisiblity(reviewBtn) & testStepStatus) {
 				LOGGER.info("reviewBtn is Present");
 				clickOn(driver, reviewBtn);
 			}else {
@@ -192,21 +192,21 @@ public boolean verifyCheckoutPage(){
 	
 	try {
 		testStepStatus = false;
-		if(checkForVisiblity(proceedToPayBtn, driver)) {
+		if(checkForVisiblity(proceedToPayBtn)) {
 			LOGGER.info("Successfully landed in Checkout Page");
-		}else if (checkForVisiblity(proceedToPayBtn, driver)) {
+		}else if (checkForVisiblity(proceedToPayBtn)) {
 			LOGGER.info("Successfully landed in Checkout Page");
 		}
 		swipe(driver, "up", "fast");
 		WebElement itemName=elemantToText(driver, productName.substring(3, 24));
 		WebElement productPrice=elemantToText(driver, itemPrice.substring(2));
-		if (checkForVisiblity(itemName, driver) && checkForVisiblity(productPrice, driver))  {
+		if (checkForVisiblity(itemName) && checkForVisiblity(productPrice))  {
 			testStepStatus=true;
 			LOGGER.info("The product name "+itemName+" matches with the details in the checkout page");
 		}else{
 			LOGGER.info("The product name "+itemName+" do not matches with the details in the checkout page");
 		}
-		if (checkForVisiblity(proceedToPayBtn, driver) & testStepStatus) {
+		if (checkForVisiblity(proceedToPayBtn) & testStepStatus) {
 			swipe(driver, "up", "fast");
 			LOGGER.info("Proceed to Pay is Present");
 			clickOn(driver, proceedToPayBtn);
@@ -229,7 +229,7 @@ public boolean sortProducts(String sortingType){
 	
 	try {
 		testStepStatus = false;
-		if (checkForVisiblity(sortBtn, driver)) {
+		if (checkForVisiblity(sortBtn)) {
 			LOGGER.info("Sort Button is Visible");
 			clickOn(driver, sortBtn);
 		}
@@ -278,19 +278,19 @@ public boolean calibratePriceFilter(String minPrice, String maxPrice){
 	
 	try {
 		testStepStatus = false;
-		if (checkForVisiblity(filterBtn, driver)) {
+		if (checkForVisiblity(filterBtn)) {
 			clickOn(driver, filterBtn);
 			LOGGER.info("Going to Calibrate Filter");
-			if (checkForVisiblity(priceRange, driver)) {
+			if (checkForVisiblity(priceRange)) {
 				clickOn(driver, priceRange);
 				clickOn(driver, customPriceRange);
-				if (checkForVisiblity(minPriceRange, driver)) {
+				if (checkForVisiblity(minPriceRange)) {
 					enterTextValue(minPriceRange, minPrice);
 					enterTextValue(maxPriceRange, maxPrice);
 				}
-				if (checkForVisiblity(filterOkBtn, driver)) 
+				if (checkForVisiblity(filterOkBtn)) 
 					clickOn(driver, filterOkBtn);
-				if (checkForVisiblity(filterDoneBtn, driver)) {
+				if (checkForVisiblity(filterDoneBtn)) {
 					clickOn(driver, filterDoneBtn);
 					LOGGER.info("Filter Calibrated");
 					testStepStatus=true;

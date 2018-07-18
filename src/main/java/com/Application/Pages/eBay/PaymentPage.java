@@ -43,7 +43,7 @@ public class PaymentPage extends KeywordFunctions implements PaymentImpl{
 ----------------------------------------------------------------------------------------------------------------*/
 	public Boolean navigateToCardPaymnetType(String paymentType) {
 		testStepStatus=false;
-		if(checkForVisiblity(paymentPage, driver)) {
+		if(checkForVisiblity(paymentPage)) {
 			LOGGER.info("Landed in Payment Page");
 		}
 		try {
@@ -98,18 +98,20 @@ public class PaymentPage extends KeywordFunctions implements PaymentImpl{
 	public Boolean inavlidUPIPayment(String UPI) {
 		testStepStatus=false;
 		try {
-			if(checkForVisiblity(UPIRadioBtn, driver)) {
+			if(checkForVisiblity(UPIRadioBtn)) {
 				clickOn(driver, UPIRadioBtn);
 				clickOn(driver, payBtn);
+			}if(checkForVisiblity(VPA)) {
+			}else if (checkForVisiblity(VPA)) {
+				LOGGER.info("Landed in UPI Payment");
 			}
-			if(checkForVisiblity(VPA, driver)) {
 				enterTextValue(VPA, UPI);
 				clickOn(driver, makePaymentBtn);
-				if (checkForVisiblity(makePaymentBtn, driver)) {
+				if (checkForVisiblity(makePaymentBtn)) {
 					clickOn(driver, makePaymentBtn);
 				}
-			}
-			if (checkForVisiblity(errorMsg,driver)) {
+			
+			if (checkForVisiblity(errorMsg)) {
 				LOGGER.error("The error occured is "+errorMsg.getAttribute("text"));
 				LOGGER.info("Error message popped Up");
 				testStepStatus=true;

@@ -38,6 +38,9 @@ public class LoginPage extends KeywordFunctions implements LoginImpl{
 	@FindBy(xpath="//*[@resource-id='com.ebay.mobile:id/textview_sign_in_status']")
 	private WebElement signInStatus;
 	
+	@FindBy(xpath="//*[contains(@text,'NO THANKS')]")
+	private WebElement noThanksBtn;
+	
 	public LoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
@@ -50,14 +53,14 @@ public class LoginPage extends KeywordFunctions implements LoginImpl{
 	public boolean logIn_Into_App(String usernameText, String passwordText){
 		try {
 			testStepStatus=false;
-			if (checkForVisiblity(signInBtn, driver)) {
-				if (checkForVisiblity(userName, driver)) {
+			if (checkForVisiblity(signInBtn)) {
+				if (checkForVisiblity(userName)) {
 					LOGGER.info("Landed in SignIn Page");
 				}else {
 					LOGGER.info("Sign In Button is Present");
 					clickOn(driver,signInBtn);
 				}
-				if(checkForVisiblity(userName, driver)) {
+				if(checkForVisiblity(userName)) {
 					LOGGER.info("Logging in with UserName "+usernameText);
 					enterTextValue(userName, usernameText);
 					enterTextValue(password, passwordText);
@@ -65,20 +68,22 @@ public class LoginPage extends KeywordFunctions implements LoginImpl{
 					clickOn(driver, signInBtn);
 					LOGGER.info("Clicked on SignIn Button");
 				}
-				if (checkForVisiblity(mayBeLater, driver)) {
+				if (checkForVisiblity(mayBeLater)) {
 					clickOn(driver, mayBeLater);
-				}else if (checkForVisiblity(notNow, driver)) {
+				}else if (checkForVisiblity(notNow)) {
 					clickOn(driver, notNow);
+				}else if (checkForVisiblity(noThanksBtn)) {
+					clickOn(driver, noThanksBtn);
 				}
 				
 			}else {
 				LOGGER.info("Sign In Button is Not Visible");
 				return false;
 			}
-			if (checkForVisiblity(gridBtn, driver)) {
+			if (checkForVisiblity(gridBtn)) {
 				clickOn(driver, gridBtn);
 				LOGGER.info("Clicked on Menu Button");
-				if (checkForVisiblity(homeBtn, driver)) {
+				if (checkForVisiblity(homeBtn)) {
 					testStepStatus=true;
 					clickOn(driver,homeBtn);
 					LOGGER.info("User is logged in Successfully");
@@ -96,10 +101,10 @@ public class LoginPage extends KeywordFunctions implements LoginImpl{
 	public boolean invalidLogin(String invalidUsernameText, String invalidPasswordText) {
 		testStepStatus=false;
 		try {
-			if (checkForVisiblity(signInBtn, driver)) {
+			if (checkForVisiblity(signInBtn)) {
 				LOGGER.info("Sign In Button is Present");
 				clickOn(driver,signInBtn);
-				if(checkForVisiblity(userName, driver)) {
+				if(checkForVisiblity(userName)) {
 					LOGGER.info("Logging in with UserName "+invalidUsernameText);
 					enterTextValue(userName, invalidUsernameText);
 					enterTextValue(password, invalidPasswordText);
@@ -108,7 +113,7 @@ public class LoginPage extends KeywordFunctions implements LoginImpl{
 					LOGGER.info("Clicked on SignIn Button");
 					
 				}
-				if (checkForVisiblity(loginErrorMsg, driver)) {
+				if (checkForVisiblity(loginErrorMsg)) {
 					System.out.println("Login Message"+loginErrorMsg.getAttribute("text"));
 					LOGGER.info("Login is Failed due to invalid Credentials");
 					testStepStatus=true;
